@@ -16,8 +16,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        {{ __('You are logged in!') }}
+                        user id: {{ $user_id }}
                     </div>
                 </div>
             </div>
