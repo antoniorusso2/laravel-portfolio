@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Project as Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 
@@ -19,11 +20,14 @@ class ProjectsSeeder extends Seeder
 
             $newProject = new Project();
 
-            $newProject->name = $faker->name;
-            $newProject->slug = $faker->slug;
+
+            $newProject->name = $faker->words(3, true);
             $newProject->customer = $faker->name;
             $newProject->description = $faker->text;
             $newProject->image = $faker->imageUrl;
+
+            $slug = Str::of("ntn rss {$newProject->name}")->slug('-');
+            $newProject->slug = $slug;
 
             $newProject->save();
         }
