@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-3">
         <div class="row row-gap-3">
             {{-- @dd($projects) --}}
             @foreach ($projects as $project)

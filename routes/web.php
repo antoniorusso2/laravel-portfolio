@@ -24,6 +24,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
 });
 
 // public route per projects guests
-Route::resource('projects', ProjectController::class);
+Route::middleware(['auth', 'verified'])->name('projects.')->prefix('projects')->group(function () {
+    Route::get('/', [ProjectController::class, 'index'])->name('index');
+});
 
 require __DIR__ . '/auth.php';
