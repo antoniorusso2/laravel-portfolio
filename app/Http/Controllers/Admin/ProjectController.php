@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class ProjectController extends Controller
     {
         //return all posts
         $projects = Project::all();
-        return view('guests.pages.projects.index', compact('projects'));
+        return view('admin.index', compact('projects'));
     }
 
     /**
@@ -38,7 +39,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('guests.pages.projects.show', compact('project'));
+        return view('admin.show', compact('project'));
     }
 
     /**

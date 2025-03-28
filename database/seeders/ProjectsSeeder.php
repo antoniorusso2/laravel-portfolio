@@ -20,7 +20,6 @@ class ProjectsSeeder extends Seeder
 
             $newProject = new Project();
 
-
             $newProject->name = $faker->words(3, true);
             $newProject->customer = $faker->name;
             $newProject->description = $faker->text;
