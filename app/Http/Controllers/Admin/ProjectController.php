@@ -23,7 +23,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        //restituisce semplicemente una view dove poi si troverà il form
+        return view('admin.create');
     }
 
     /**
