@@ -24,8 +24,10 @@ class ProjectsSeeder extends Seeder
             $newProject->customer = $faker->name;
             $newProject->description = $faker->text;
             $newProject->image = $faker->imageUrl;
+            $newProject->category = $faker->words(1, true);
 
             $slug = Str::of("ntn rss {$newProject->name}")->slug('-');
+
             $newProject->slug = $slug;
 
             $newProject->save();

@@ -7,25 +7,27 @@
                 <h1>Create Project</h1>
             </div>
             <div class="col-12">
-                <form action="" method="post" class="w-50 mx-auto">
+                <form action="{{ route('projects.store') }}" method="post" class="w-50 mx-auto">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nome</label>
+                        <label for="name" class="form-label">Titolo</label>
                         <input type="text" class="form-control" id="name" name="name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Descrizione</label>
-                        <input type="text" class="form-control" id="description" name="description">
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Immagine</label>
                         <input type="text" class="form-control" id="image" name="image">
                     </div>
                     <div class="mb-3">
-                        <label for="link" class="form-label">Link</label>
-                        <input type="text" class="form-control" id="link" name="link">
+                        <label for="customer" class="form-label">Cliente</label>
+                        <input type="text" class="form-control" id="customer" name="customer">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Descrizione</label>
+                        <textarea class="form-control w-100" name="description" id="description" cols="30" rows="3">
+    
+                        </textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
                 </form>
             </div>
         </div>

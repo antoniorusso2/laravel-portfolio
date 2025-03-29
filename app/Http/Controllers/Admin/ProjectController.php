@@ -32,7 +32,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newProject = $request->all();
+
+        // creazione slug
+        $newProject['slug'] = Project::generateSlug($newProject['name']);
+
+        if (Project::all()->contains('slug', $newProject['slug'])) {
+            // se esiste un progetto con lo stesso slug
+            return 'Progetto omonimo già esistente';
+        } else {
+            Project::create($newProject);
+
+            return redirect(route('admin.show', $newProject));
+        }
     }
 
     /**
