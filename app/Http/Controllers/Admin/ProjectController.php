@@ -32,7 +32,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $newProject = $request->all();
+        $data = $request->all(); //array associativo
+
+        $newProject = new Project(); //istanza del modello
+
+        $newProject->name = $data['name'];
+        $newProject->customer = $data['customer'];
+        $newProject->description = $data['description'];
+        $newProject->image = $data['image'];
+        // $newProject->category = $data['category'];
 
         // creazione slug
         $newProject['slug'] = Project::generateSlug($newProject['name']);
@@ -41,9 +49,11 @@ class ProjectController extends Controller
             // se esiste un progetto con lo stesso slug
             return 'Progetto omonimo già esistente';
         } else {
-            Project::create($newProject);
+            $newProject->save();
 
-            return redirect(route('admin.show', $newProject));
+            // dd($newProject);
+
+            return redirect(route('projects.show', $newProject));
         }
     }
 
