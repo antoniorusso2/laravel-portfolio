@@ -40,7 +40,7 @@ class ProjectController extends Controller
         $newProject->customer = $data['customer'];
         $newProject->description = $data['description'];
         $newProject->image = $data['image'];
-        // $newProject->category = $data['category'];
+        $newProject->type_id = $data['type_id'];
 
         // creazione slug
         $newProject['slug'] = Project::generateSlug($newProject['name']);

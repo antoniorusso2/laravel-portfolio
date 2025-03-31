@@ -20,10 +20,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    // Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
 
 // public route per projects guests
-Route::resource('projects', ProjectController::class)->middleware(['auth', 'verified']);
+Route::resource('projects', ProjectController::class);
 
 require __DIR__ . '/auth.php';
