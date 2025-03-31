@@ -90,16 +90,16 @@ class ProjectController extends Controller
 
         // dd($project->slug, $newSlug);
 
-        //controllo slug diverso da tutti gli altri
-        if (Project::all()->contains('slug', $newSlug)) {
-            // se esiste un progetto con lo stesso slug
-            return 'Progetto omonimo già esistente';
-        }
-
         //controllo slug diverso da quello precedente
         if ($newSlug != $project->slug) {
             // creazione slug
             $project->slug = $newSlug;
+
+            //controllo slug diverso da tutti gli altri
+            if (Project::all()->contains('slug', $newSlug)) {
+                // se esiste un progetto con lo stesso slug
+                return 'Progetto omonimo già esistente';
+            }
         }
 
         $project->update();
@@ -110,8 +110,9 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect(route('projects.index'));
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Crea Progetto')
 
 @section('content')
     <div class="container mt-3">
