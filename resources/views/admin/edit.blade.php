@@ -4,27 +4,28 @@
     <div class="container mt-3">
         <div class="row row-gap-3">
             <div class="col-12 text-center">
-                <h1>Crea Progetto</h1>
+                <h1>Modifica Progetto</h1>
             </div>
             <div class="col-12">
-                <form action="{{ route('projects.store') }}" method="post" class="w-50 mx-auto">
+                <form action="{{ route('projects.update', $project) }}" method="post" class="w-50 mx-auto">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
-                        <label for="name" class="form-label">Titolo</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <label for="name" class="form-label">Nome del progetto</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $project->name }}">
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Immagine</label>
-                        <input type="text" class="form-control" id="image" name="image">
+                        <input type="text" class="form-control" id="image" name="image" value="{{ $project->image }}">
                     </div>
                     <div class="mb-3">
                         <label for="customer" class="form-label">Cliente</label>
-                        <input type="text" class="form-control" id="customer" name="customer">
+                        <input type="text" class="form-control" id="customer" name="customer" value="{{ $project->customer }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="description">Descrizione</label>
                         <textarea class="form-control w-100" name="description" id="description" cols="30" rows="3">
-    
+                            {{ $project->description }}
                         </textarea>
                     </div>
                     <button type="submit" class="btn btn-outline-primary">Submit</button>

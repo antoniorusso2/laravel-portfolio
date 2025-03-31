@@ -68,17 +68,43 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->all(); //array associativo
+
+        $project->name = $data['name'];
+        $project->customer = $data['customer'];
+        $project->description = $data['description'];
+        $project->image = $data['image'];
+        // $project->category = $data['category'];
+
+        $newSlug = Project::generateSlug($project['name']);
+
+        // dd($project->slug, $newSlug);
+
+        //controllo slug diverso da tutti gli altri
+        if (Project::all()->contains('slug', $newSlug)) {
+            // se esiste un progetto con lo stesso slug
+            return 'Progetto omonimo già esistente';
+        }
+
+        //controllo slug diverso da quello precedente
+        if ($newSlug != $project->slug) {
+            // creazione slug
+            $project->slug = $newSlug;
+        }
+
+        $project->update();
+
+        return redirect(route('projects.show', $project));
     }
 
     /**
