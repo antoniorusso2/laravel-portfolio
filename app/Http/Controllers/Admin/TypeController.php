@@ -40,4 +40,18 @@ class TypeController extends Controller
     {
         return view('admin.projects-types.show', compact('type'));
     }
+
+    public function edit(Type $type)
+    {
+        return view('admin.projects-types.edit', compact('type'));
+    }
+
+    public function update(Request $request, Type $type)
+    {
+        $type->name = $request->name;
+        $type->description = $request->description;
+        $type->save();
+
+        return redirect(route('types.show', $type));
+    }
 }
