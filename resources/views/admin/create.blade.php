@@ -18,6 +18,15 @@
                         <label for="image" class="form-label">Immagine</label>
                         <input type="text" class="form-control" id="image" name="image">
                     </div>
+                    {{-- type --}}
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Tipo</label>
+                        <select class="form-select" name="type_id" id="type">
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="customer" class="form-label">Cliente</label>
                         <input type="text" class="form-control" id="customer" name="customer">

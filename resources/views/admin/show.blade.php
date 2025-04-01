@@ -18,7 +18,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-                <img src="https://placehold.co/600x400" alt="screenshot project" class="card-img-top">
+                <img src='https://placehold.co/600x400' alt="immagine progetto" class="card-img-top">
             </div>
             <div class="col-12 col-md-6">
                 <p>{{ $project->description }}</p>
