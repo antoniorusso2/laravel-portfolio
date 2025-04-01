@@ -16,8 +16,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        user id: {{ $user_id }}
                     </div>
+                    {{-- pannello modifica progetti --}}
+                    <div class="card-body">
+                        <a href="{{ route('projects.index') }}" class="btn btn-primary">Modifica progetti</a>
+                        <a href="{{ route('types.index') }}" class="btn btn-primary">Modifica tipologie</a>
+                    </div>
+
                 </div>
             </div>
         </div>
