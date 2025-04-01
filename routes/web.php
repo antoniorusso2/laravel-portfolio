@@ -29,14 +29,14 @@ Route::resource('projects', ProjectController::class)->middleware(['auth', 'veri
 
 
 // rotte per i types
-Route::prefix('types')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', [TypeController::class, 'index'])->name('types.index');
-    Route::get('/{type}', [TypeController::class, 'show'])->name('types.show');
-    Route::get('/create', [TypeController::class, 'create'])->name('types.create');
-    Route::post('/', [TypeController::class, 'store'])->name('types.store');
-    Route::get('/{type}/edit', [TypeController::class, 'edit'])->name('types.edit');
-    Route::put('/{type}', [TypeController::class, 'update'])->name('types.update');
-    Route::delete('/{type}', [TypeController::class, 'destroy'])->name('types.destroy');
+Route::prefix('types')->name('types.')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [TypeController::class, 'index'])->name('index');
+    Route::post('/', [TypeController::class, 'store'])->name('store');
+    Route::get('/create', [TypeController::class, 'create'])->name('create');
+    Route::get('/{type}/edit', [TypeController::class, 'edit'])->name('edit');
+    Route::get('/{type}', [TypeController::class, 'show'])->name('show');
+    Route::put('/{type}', [TypeController::class, 'update'])->name('update');
+    Route::delete('/{type}', [TypeController::class, 'destroy'])->name('destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -7,7 +7,8 @@
         <h2 class="fs-4 text-secondary my-4">
             {{ __('Tipologie per i progetti') }}
         </h2>
-        <a href="{{ route('types.create') }}" class="btn btn-primary">Crea nuova tipologia</a>
+        {{-- @dd(route('types.create')) --}}
+        <a href="{{ route('types.create') }}" class="btn btn-primary mb-3">Crea nuova tipologia</a>
     </div>
     <div class="container mt-3">
         <div class="row row-gap-3">
