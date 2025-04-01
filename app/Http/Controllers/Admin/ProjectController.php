@@ -62,6 +62,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        // dd($project->type);
         return view('admin.show', compact('project'));
     }
 

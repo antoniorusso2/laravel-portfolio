@@ -15,7 +15,7 @@ class TypesSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
-        $types = ['web', 'mobile', 'desktop', 'design', 'other'];
+        $types = ['web', 'mobile', 'desktop', 'design', 'api', 'cms'];
 
         foreach ($types as $type) {
             $newType = new Type();

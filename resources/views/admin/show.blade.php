@@ -6,7 +6,8 @@
     <div class="container mt-5">
         <div class="row row-gap-3">
             <div class="col-12">
-                <h1>{{ $project->name }}</h1>
+                <h1 class="display-5 fw-bold text-capitalize">{{ $project->name }}</h1>
+                <p class=" d-inline px-2 py-1 project_type fw-bold fs-4 text-uppercase bg-dark bg-gradient text-white text-center">{{ $project->type->name }}</p>
             </div>
             <div class="col-12 d-flex gap-3">
                 <a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a>
@@ -14,8 +15,8 @@
                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Elimina
                 </button>
-
             </div>
+
             <div class="col-12 col-md-6">
                 <img src="https://placehold.co/600x400" alt="screenshot project" class="card-img-top">
             </div>
