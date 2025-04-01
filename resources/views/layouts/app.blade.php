@@ -34,7 +34,7 @@
                             </g>
                         </svg>
                     </div>
-                    {{-- config('app.name', 'Laravel') --}}
+
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,6 +49,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('projects.index') }}">{{ __('Projects') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('types.index') }}">{{ __('Types') }}</a>
                         </li>
                     </ul>
 

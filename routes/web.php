@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,10 +21,22 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
-    // Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
 
 // public route per projects guests
-Route::resource('projects', ProjectController::class);
+Route::resource('projects', ProjectController::class)->middleware(['auth', 'verified']);
+
+
+// rotte per i types
+Route::prefix('types')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [TypeController::class, 'index'])->name('types.index');
+    Route::get('/{type}', [TypeController::class, 'show'])->name('types.show');
+    Route::get('/create', [TypeController::class, 'create'])->name('types.create');
+    Route::post('/store', [TypeController::class, 'store'])->name('types.store');
+    Route::get('/{type}/edit', [TypeController::class, 'edit'])->name('types.edit');
+    Route::put('/{type}/update', [TypeController::class, 'update'])->name('types.update');
+    Route::delete('/{type}/delete', [TypeController::class, 'destroy'])->name('types.destroy');
+});
 
 require __DIR__ . '/auth.php';
