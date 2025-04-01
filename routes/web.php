@@ -33,10 +33,10 @@ Route::prefix('types')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [TypeController::class, 'index'])->name('types.index');
     Route::get('/{type}', [TypeController::class, 'show'])->name('types.show');
     Route::get('/create', [TypeController::class, 'create'])->name('types.create');
-    Route::post('/store', [TypeController::class, 'store'])->name('types.store');
+    Route::post('/', [TypeController::class, 'store'])->name('types.store');
     Route::get('/{type}/edit', [TypeController::class, 'edit'])->name('types.edit');
-    Route::put('/{type}/update', [TypeController::class, 'update'])->name('types.update');
-    Route::delete('/{type}/delete', [TypeController::class, 'destroy'])->name('types.destroy');
+    Route::put('/{type}', [TypeController::class, 'update'])->name('types.update');
+    Route::delete('/{type}', [TypeController::class, 'destroy'])->name('types.destroy');
 });
 
 require __DIR__ . '/auth.php';
