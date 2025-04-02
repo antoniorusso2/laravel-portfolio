@@ -22,7 +22,6 @@
                         <a href="{{ route('projects.index') }}" class="btn btn-primary">Modifica progetti</a>
                         <a href="{{ route('types.index') }}" class="btn btn-primary">Modifica tipologie</a>
                     </div>
-
                 </div>
             </div>
         </div>
