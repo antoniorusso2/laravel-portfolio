@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Progetti')
+
 @section('content')
     <div class="container mt-3">
         {{-- link al form per la creazione di un nuovo progetto --}}
