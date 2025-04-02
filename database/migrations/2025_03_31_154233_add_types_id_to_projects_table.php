@@ -21,7 +21,7 @@ return new class extends Migration
             // $table->foreign('type_id')->references('id')->on('types');
 
             //aggiunta nuova colonna con foreign key
-            $table->foreignId('type_id')->constrained();
+            $table->foreignId('type_id')->nullable()->constrained()->onDelete('set null');
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,9 @@ class TypeController extends Controller
 
     public function destroy(Type $type)
     {
+        // eliminazione del valore nella colonna type_id dei progetti collegati alla tipologia
+        //il valore della colonna type_id non può essere null per via della constraint
+        Project::where('type_id', $type->id)->update(['type_id' => null]);
         $type->delete();
         return redirect(route('types.index'));
     }

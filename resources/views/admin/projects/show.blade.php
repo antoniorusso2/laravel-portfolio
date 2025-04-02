@@ -7,7 +7,9 @@
         <div class="row row-gap-3">
             <div class="col-12">
                 <h1 class="display-5 fw-bold text-capitalize">{{ $project->name }}</h1>
-                <p class=" d-inline px-2 py-1 project_type fw-bold fs-4 text-uppercase bg-dark bg-gradient text-white text-center">{{ $project->type->name }}</p>
+                @if ($project->type != null)
+                    <p class=" d-inline px-2 py-1 project_type fw-bold fs-4 text-uppercase bg-dark bg-gradient text-white text-center">{{ $project->type->name }}</p>
+                @endif
             </div>
             <div class="col-12 d-flex gap-3">
                 <a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a>

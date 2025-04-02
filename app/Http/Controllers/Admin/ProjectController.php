@@ -16,7 +16,7 @@ class ProjectController extends Controller
     {
         //return all posts
         $projects = Project::all();
-        return view('admin.index', compact('projects'));
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -28,7 +28,7 @@ class ProjectController extends Controller
 
         // dd($types);
         //restituisce semplicemente una view dove poi si troverà il form
-        return view('admin.create', compact("types"));
+        return view('admin.projects.create', compact("types"));
     }
 
     /**
@@ -57,7 +57,7 @@ class ProjectController extends Controller
 
             // dd($newProject);
 
-            return redirect(route('projects.show', $newProject));
+            return redirect(route('admin.projects.show', $newProject));
         }
     }
 
@@ -67,7 +67,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         // dd($project->type);
-        return view('admin.show', compact('project'));
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -77,7 +77,7 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('admin.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -111,7 +111,7 @@ class ProjectController extends Controller
 
         $project->update();
 
-        return redirect(route('projects.show', $project));
+        return redirect(route('admin.projects.show', $project));
     }
 
     /**
@@ -120,6 +120,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect(route('projects.index'));
+        return redirect(route('admin.projects.index'));
     }
 }
