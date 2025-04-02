@@ -54,4 +54,10 @@ class TypeController extends Controller
 
         return redirect(route('types.show', $type));
     }
+
+    public function destroy(Type $type)
+    {
+        $type->delete();
+        return redirect(route('types.index'));
+    }
 }

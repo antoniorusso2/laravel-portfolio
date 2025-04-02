@@ -4,9 +4,6 @@
 
 @section('content')
     <div class="container mb-5">
-        <h2 class="fs-4 text-secondary my-4">
-            {{ __('Tipologie per i progetti') }}
-        </h2>
         {{-- @dd(route('types.create')) --}}
         <a href="{{ route('types.create') }}" class="btn btn-primary mb-3">Crea nuova tipologia</a>
     </div>

@@ -11,7 +11,7 @@
                 </h2>
             </div>
             <div class="col">
-                <a href="{{ route('types.index') }}" class="btn btn-outline-warning">Indietro</a>
+                <a href="{{ route('types.index') }}" class="btn btn-outline-primary">Indietro</a>
             </div>
         </div>
         <div class="row row-gap-3 description">
