@@ -12,7 +12,7 @@ class TypeController extends Controller
     public function index()
     {
         $types = Type::all();
-        return view('admin.projects-types.index', compact('types'));
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -24,7 +24,7 @@ class TypeController extends Controller
 
         // dd($types);
         //restituisce semplicemente una view dove poi si troverà il form
-        return view('admin.projects-types.create');
+        return view('admin.types.create');
     }
 
     public function store(Request $request)
@@ -39,12 +39,12 @@ class TypeController extends Controller
 
     public function show(Type $type)
     {
-        return view('admin.projects-types.show', compact('type'));
+        return view('admin.types.show', compact('type'));
     }
 
     public function edit(Type $type)
     {
-        return view('admin.projects-types.edit', compact('type'));
+        return view('admin.types.edit', compact('type'));
     }
 
     public function update(Request $request, Type $type)
