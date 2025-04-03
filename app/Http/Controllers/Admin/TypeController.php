@@ -29,9 +29,13 @@ class TypeController extends Controller
 
     public function store(Request $request)
     {
+        $data = $request->all();
+
         $newType = new Type();
-        $newType->name = $request->name;
-        $newType->description = $request->description;
+
+        $newType->name = $data['name'];
+        $newType->description = $data['description'];
+
         $newType->save();
 
         return redirect(route('types.show', $newType));
@@ -51,6 +55,7 @@ class TypeController extends Controller
     {
         $type->name = $request->name;
         $type->description = $request->description;
+
         $type->save();
 
         return redirect(route('types.show', $type));
@@ -59,9 +64,10 @@ class TypeController extends Controller
     public function destroy(Type $type)
     {
         // eliminazione del valore nella colonna type_id dei progetti collegati alla tipologia
-        //il valore della colonna type_id non può essere null per via della constraint
         Project::where('type_id', $type->id)->update(['type_id' => null]);
+
         $type->delete();
+
         return redirect(route('types.index'));
     }
 }

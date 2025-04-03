@@ -27,6 +27,20 @@
                             @endforeach
                         </select>
                     </div>
+
+                    {{-- technologies --}}
+                    <div class="mb-3 d-flex flex-wrap column-gap-3">
+                        <label class="form-label w-100" for="technologies" class="form-label">Linguaggi e Framework</label>
+                        {{-- checkboxes --}}
+                        @foreach ($technologies as $technology)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" name="technologies[]">
+                                <label class="form-check-label" for="technologies">
+                                    {{ $technology->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
                     <div class="mb-3">
                         <label for="customer" class="form-label">Cliente</label>
                         <input type="text" class="form-control" id="customer" name="customer">

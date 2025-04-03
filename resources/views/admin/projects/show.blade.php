@@ -19,6 +19,19 @@
                 </button>
             </div>
 
+            {{-- tech stack --}}
+            <div class="col-12">
+                <h2 class="text-capitalize my-4 fs-1">
+                    Tech Stack
+                </h2>
+            </div>
+            <div class="col-12">
+                <ul class="list-group">
+                    @foreach ($project->technologies as $technology)
+                        <li class="list-group-item">{{ $technology->name }}</li>
+                    @endforeach
+                </ul>
+            </div>
             <div class="col-12 col-md-6">
                 <img src='https://placehold.co/600x400' alt="immagine progetto" class="card-img-top">
             </div>
@@ -29,28 +42,4 @@
     </div>
 
     <x-delete-modal :route="route('projects.destroy', $project)" :item="$project" />
-
-    {{-- <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminare definitivamente il post?</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Una volta eliminato il post non sarà più disponibile!
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annulla</button>
-                    <form action="{{ route('projects.destroy', $project) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger">Elimina</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
 @endsection

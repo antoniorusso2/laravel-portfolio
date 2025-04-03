@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -25,10 +26,11 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
         // dd($types);
         //restituisce semplicemente una view dove poi si troverà il form
-        return view('admin.projects.create', compact("types"));
+        return view('admin.projects.create', compact("types", "technologies"));
     }
 
     /**
@@ -37,6 +39,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->all(); //array associativo
+
+        // dd($data);
 
         $newProject = new Project(); //istanza del modello
 
@@ -55,6 +59,7 @@ class ProjectController extends Controller
         } else {
             $newProject->save();
 
+            $newProject->technologies()->attach($data['technologies']); //dopo aver salvato il record si va ad interagire con la tabella pivot
             // dd($newProject);
 
             return redirect(route('projects.show', $newProject));
@@ -66,7 +71,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        // dd($project->type);
+        // dd($project->technologies);
         return view('admin.projects.show', compact('project'));
     }
 

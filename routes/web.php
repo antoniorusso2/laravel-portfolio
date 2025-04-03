@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
 });
 
 // public route per projects guests
-Route::resource('projects', ProjectController::class)->middleware(['auth', 'verified']);
+Route::resource('projects', ProjectController::class);
 
 
 // rotte per i types

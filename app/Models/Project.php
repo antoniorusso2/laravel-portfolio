@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $fillable = ['name', 'slug', 'description', 'url'];
+    // protected $fillable = ['name', 'slug', 'description'];
 
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class);
     }
 
     public static function generateSlug($name)
