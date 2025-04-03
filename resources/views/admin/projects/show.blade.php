@@ -21,14 +21,14 @@
 
             {{-- tech stack --}}
             <div class="col-12">
-                <h2 class="text-capitalize my-4 fs-1">
+                <h2 class="text-capitalize">
                     Tech Stack
                 </h2>
             </div>
             <div class="col-12">
-                <ul class="list-group">
+                <ul class="list-group list-group-horizontal">
                     @foreach ($project->technologies as $technology)
-                        <li class="list-group-item">{{ $technology->name }}</li>
+                        <li class="badge rounded-pill" style="background-color: {{ $technology->color }}">{{ $technology->name }}</li>
                     @endforeach
                 </ul>
             </div>

@@ -81,8 +81,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -113,6 +114,8 @@ class ProjectController extends Controller
                 return 'Progetto omonimo già esistente';
             }
         }
+
+        $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
 
         $project->update();
 
