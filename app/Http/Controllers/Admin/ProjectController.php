@@ -93,6 +93,8 @@ class ProjectController extends Controller
     {
         $data = $request->all(); //array associativo
 
+        // dd($data);
+
         $project->name = $data['name'];
         $project->customer = $data['customer'];
         $project->description = $data['description'];
@@ -115,9 +117,15 @@ class ProjectController extends Controller
             }
         }
 
-        $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
-
         $project->update();
+
+        if ($request->has('technologies')) {
+            // ?? non ricevendo un array se nessuna tecnologia viene passata si ha un errore
+            $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
+        } else {
+            $project->technologies()->detach();
+        }
+
 
         return redirect(route('projects.show', $project));
     }
