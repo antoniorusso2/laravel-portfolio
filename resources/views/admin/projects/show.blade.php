@@ -20,18 +20,20 @@
             </div>
 
             {{-- tech stack --}}
-            <div class="col-12">
-                <h2 class="text-capitalize">
-                    Tech Stack
-                </h2>
-            </div>
-            <div class="col-12">
-                <ul class="list-group list-group-horizontal">
-                    @foreach ($project->technologies as $technology)
-                        <li class="badge rounded-pill" style="background-color: {{ $technology->color }}">{{ $technology->name }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            @if ($project->technologies->count() > 0)
+                <div class="col-12">
+                    <h2 class="text-capitalize">
+                        Tech Stack
+                    </h2>
+                </div>
+                <div class="col-12">
+                    <ul class="list-group list-group-horizontal">
+                        @foreach ($project->technologies as $technology)
+                            <li class="badge rounded-pill" style="background-color: {{ $technology->color }}">{{ $technology->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="col-12 col-md-6">
                 <img src='https://placehold.co/600x400' alt="immagine progetto" class="card-img-top">
             </div>

@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,11 +26,25 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
 });
 
 // public route per projects guests
+// Route::resource('projects', ProjectController::class)->middleware(['auth', 'verified']);
+
+//!debug only no auth
 Route::resource('projects', ProjectController::class);
 
 
-// rotte per i types
-Route::prefix('types')->name('types.')->middleware(['auth', 'verified'])->group(function () {
+//?? auth rotte per i types
+// Route::prefix('types')->name('types.')->middleware(['auth', 'verified'])->group(function () {
+//     Route::get('/', [TypeController::class, 'index'])->name('index');
+//     Route::post('/', [TypeController::class, 'store'])->name('store');
+//     Route::get('/create', [TypeController::class, 'create'])->name('create');
+//     Route::get('/{type}/edit', [TypeController::class, 'edit'])->name('edit');
+//     Route::get('/{type}', [TypeController::class, 'show'])->name('show');
+//     Route::put('/{type}', [TypeController::class, 'update'])->name('update');
+//     Route::delete('/{type}', [TypeController::class, 'destroy'])->name('destroy');
+// });
+
+// !debug only no auth
+Route::prefix('types')->name('types.')->group(function () {
     Route::get('/', [TypeController::class, 'index'])->name('index');
     Route::post('/', [TypeController::class, 'store'])->name('store');
     Route::get('/create', [TypeController::class, 'create'])->name('create');
@@ -38,5 +53,8 @@ Route::prefix('types')->name('types.')->middleware(['auth', 'verified'])->group(
     Route::put('/{type}', [TypeController::class, 'update'])->name('update');
     Route::delete('/{type}', [TypeController::class, 'destroy'])->name('destroy');
 });
+
+// technologies
+Route::resource('technologies', TechnologyController::class);
 
 require __DIR__ . '/auth.php';
