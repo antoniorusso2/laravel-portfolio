@@ -3,7 +3,7 @@
 @section('title', 'Tipologie per i progetti')
 
 @section('content')
-    <div class="container mb-5">
+    <div class="container ">
         {{-- @dd(route('types.create')) --}}
         <a href="{{ route('types.create') }}" class="btn btn-primary mb-3">Crea nuova tipologia</a>
     </div>

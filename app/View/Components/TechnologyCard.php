@@ -2,25 +2,22 @@
 
 namespace App\View\Components;
 
-use App\Models\Project;
 use App\Models\Technology;
-use App\Models\Type;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class DeleteModal extends Component
+class TechnologyCard extends Component
 {
-    public Type | Project | Technology $item;
-    public string $route;
+
+    public Technology $technology;
 
     /**
      * Create a new component instance.
      */
-    public function __construct(Type | Project | Technology $item, string $route)
+    public function __construct(Technology $technology)
     {
-        $this->item = $item;
-        $this->route = $route;
+        $this->technology = $technology;
     }
 
     /**
@@ -28,6 +25,6 @@ class DeleteModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.delete-modal');
+        return view('components.technology-card');
     }
 }
