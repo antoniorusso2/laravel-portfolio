@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 
@@ -80,8 +81,13 @@ class TechnologyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Technology $technology)
     {
-        //
+        // eliminazione del valore nella colonna technology id dalla tabella pivot
+
+
+        $technology->delete();
+
+        return redirect(route('technologies.index'));
     }
 }
