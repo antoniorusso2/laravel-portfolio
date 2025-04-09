@@ -23,8 +23,8 @@ class Project extends Model
         return 'ntn-rss-' . str_replace(' ', '-', strtolower($name));
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 }
