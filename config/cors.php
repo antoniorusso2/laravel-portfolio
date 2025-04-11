@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['GET'],
 
-    'allowed_origins' => ['http://localhost:5174'],
+    'allowed_origins' => [env('APP_URL', 'http://localhost')],
 
     'allowed_origins_patterns' => [],
 

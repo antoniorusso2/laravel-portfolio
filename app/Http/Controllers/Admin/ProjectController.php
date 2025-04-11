@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -17,6 +18,10 @@ class ProjectController extends Controller
     {
         //return all posts
         $projects = Project::all();
+
+        // Storage::disk('local')->put('projects.json', json_encode($projects));
+        // Storage::delete('projects.json');
+
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -120,7 +125,6 @@ class ProjectController extends Controller
         $project->update();
 
         if ($request->has('technologies')) {
-            // ?? non ricevendo un array se nessuna tecnologia viene passata si ha un errore
             $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
         } else {
             $project->technologies()->detach();
