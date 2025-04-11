@@ -23,7 +23,7 @@ class ProjectsSeeder extends Seeder
             $newProject->name = $faker->words(3, true);
             $newProject->customer = $faker->name;
             $newProject->description = $faker->text;
-            $newProject->image = 'https://placehold.co/600x400';
+            $newProject->image = null;
             $newProject->type_id = rand(1, 5);
 
             $slug = Str::of("ntn rss {$newProject->name}")->slug('-');
