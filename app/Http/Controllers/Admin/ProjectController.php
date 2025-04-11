@@ -19,11 +19,6 @@ class ProjectController extends Controller
         //return all posts
         $projects = Project::all();
 
-        // Storage::disk('local')->put('projects.json', json_encode($projects));
-        // Storage::delete('projects.json');
-
-        Storage::disk('public')->delete('projects.json');
-
         return view('admin.projects.index', compact('projects'));
     }
 
