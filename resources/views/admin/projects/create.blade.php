@@ -8,7 +8,7 @@
                 <h1>Crea Progetto</h1>
             </div>
             <div class="col-12">
-                <form action="{{ route('projects.store') }}" method="post" class="w-50 mx-auto">
+                <form action="{{ route('projects.store') }}" method="post" class="w-50 mx-auto" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Titolo</label>
@@ -16,7 +16,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Immagine</label>
-                        <input type="text" class="form-control" id="image" name="image">
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
                     {{-- type --}}
                     <div class="mb-3">

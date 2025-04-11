@@ -49,8 +49,20 @@ class ProjectController extends Controller
         $newProject->name = $data['name'];
         $newProject->customer = $data['customer'];
         $newProject->description = $data['description'];
-        $newProject->image = $data['image'];
+
+        if (isset($data['image'])) {
+
+            $newProject->image = $data['image'];
+            $img_url = Storage::disk('public')->put('uploads', $data['image']);
+
+            $newProject->image = $img_url;
+        }
+
+        // echo asset('storage/' . $img_url);
+
         $newProject->type_id = $data['type_id'];
+
+        // dd($newProject);
 
         // creazione slug
         $newProject['slug'] = Project::generateSlug($newProject['name']);
@@ -94,14 +106,28 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $request->all(); //array associativo
+        // $path = $request->file('image')->store('projects', 'public');
+        // dd([
+        //     'storage_path' => storage_path(),
+        //     'stored_path' => $path,
+        //     'public_url' => asset('storage/' . $path),
+        // ]);
 
         // dd($data);
 
         $project->name = $data['name'];
         $project->customer = $data['customer'];
         $project->description = $data['description'];
-        $project->image = $data['image'];
         $project->type_id = $data['type_id'];
+
+
+        if (isset($data['image'])) {
+            $project->image = $data['image'];
+            // $img_url = Storage::disk('public')->put('uploads', $data['image']);
+            $img_url = Storage::putFile('uploads', $data['image']);
+
+            $project->image = $img_url;
+        }
 
         $newSlug = Project::generateSlug($project['name']);
 

@@ -9,7 +9,7 @@
                 <h1>Modifica Progetto</h1>
             </div>
             <div class="col-12">
-                <form action="{{ route('projects.update', $project) }}" method="post" class="w-50 mx-auto">
+                <form action="{{ route('projects.update', $project) }}" method="post" class="w-50 mx-auto" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
@@ -17,8 +17,14 @@
                         <input type="text" class="form-control" id="name" name="name" value="{{ $project->name }}">
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Immagine</label>
-                        <input type="text" class="form-control" id="image" name="image" value="{{ $project->image }}">
+                        <div class="prev_img">
+                            <p>Immagine attuale</p>
+                            <img src="{{ asset('storage/' . $project->image) }}" alt="" class="w-25 img-fluid">
+                            {{-- x icon for delete img --}}
+
+                        </div>
+                        <label for="image" class="form-label col-12">Immagine</label>
+                        <input type="file" class="form-control mb-3" id="image" name="image">
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Tipo</label>
