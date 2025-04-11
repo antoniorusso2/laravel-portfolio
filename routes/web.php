@@ -57,4 +57,7 @@ Route::prefix('types')->name('types.')->group(function () {
 // technologies
 Route::resource('technologies', TechnologyController::class);
 
+// custom delete image route
+Route::delete('projects/{project}/image', [ProjectController::class, 'destroyImage'])->name('projects.destroyImage');
+
 require __DIR__ . '/auth.php';

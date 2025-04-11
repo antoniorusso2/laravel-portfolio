@@ -17,12 +17,16 @@
                         <input type="text" class="form-control" id="name" name="name" value="{{ $project->name }}">
                     </div>
                     <div class="mb-3">
-                        <div class="prev_img">
-                            <p>Immagine attuale</p>
-                            <img src="{{ asset('storage/' . $project->image) }}" alt="" class="w-25 img-fluid">
-                            {{-- x icon for delete img --}}
-
-                        </div>
+                        @if ($project->image)
+                            <div class="prev_img">
+                                <p>Immagine attuale</p>
+                                <img src="{{ asset('storage/' . $project->image) }}" alt="" class="w-25 img-fluid">
+                                {{-- x icon for delete img --}}
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Elimina
+                                </button>
+                            </div>
+                        @endif
                         <label for="image" class="form-label col-12">Immagine</label>
                         <input type="file" class="form-control mb-3" id="image" name="image">
                     </div>
@@ -56,13 +60,36 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="description">Descrizione</label>
-                        <textarea class="form-control w-100" name="description" id="description" cols="30" rows="3">
-                            {{ $project->description }}
-                        </textarea>
+                        <textarea class="form-control w-100" name="description" id="description" cols="30" rows="3">{{ $project->description }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" id="exampleModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Elimnando l'immagine questa non sarà più disponibile</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    <form action="{{ route('projects.destroyImage', $project) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection

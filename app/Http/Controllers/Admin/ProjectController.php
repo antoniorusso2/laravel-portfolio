@@ -121,13 +121,6 @@ class ProjectController extends Controller
         $project->type_id = $data['type_id'];
 
 
-        if (isset($data['image'])) {
-            $project->image = $data['image'];
-            // $img_url = Storage::disk('public')->put('uploads', $data['image']);
-            $img_url = Storage::putFile('uploads', $data['image']);
-
-            $project->image = $img_url;
-        }
 
         $newSlug = Project::generateSlug($project['name']);
 
@@ -143,6 +136,14 @@ class ProjectController extends Controller
                 // se esiste un progetto con lo stesso slug
                 return 'Progetto omonimo già esistente';
             }
+        }
+
+        if (isset($data['image'])) {
+            $project->image = $data['image'];
+            // $img_url = Storage::disk('public')->put('uploads', $data['image']);
+            $img_url = Storage::putFile('uploads', $data['image']);
+
+            $project->image = $img_url;
         }
 
         $project->update();
@@ -164,5 +165,17 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect(route('projects.index'));
+    }
+
+    public function destroyImage(Project $project)
+    {
+        if (Storage::has($project->image)) {
+            Storage::delete($project->image);
+            // dd('immagine presente in local storage');
+        }
+
+        $project->image = null;
+        $project->update();
+        return redirect(route('projects.edit', $project));
     }
 }
