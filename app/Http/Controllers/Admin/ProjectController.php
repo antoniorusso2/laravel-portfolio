@@ -163,12 +163,19 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // se l'immagine esite ed è diversa da null in questo punto allora controllo se esiste in local storage e la elimino anche dallo storage locale
+        if ($project->image && Storage::exists($project->image)) {
+            Storage::delete($project->image);
+            // dd('immagine presente in local storage');
+        }
+
         $project->delete();
         return redirect(route('projects.index'));
     }
 
     public function destroyImage(Project $project)
     {
+        // ??temporary bin in storage future update
         if (Storage::has($project->image)) {
             Storage::delete($project->image);
             // dd('immagine presente in local storage');

@@ -1,4 +1,7 @@
-# Personal portfolio
+# Simple backoffice for a portfolio
 
--   ## Tech stack :
-         Php - laravel - breeze - bootstrap
+-   TECH STACK:
+    -   Laravel
+    -   Blade
+
+# ! Still in a develop state !
