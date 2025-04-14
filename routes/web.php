@@ -39,7 +39,7 @@ Route::prefix('types')->name('types.')->middleware(['auth', 'verified'])->group(
     Route::delete('/{type}', [TypeController::class, 'destroy'])->name('destroy');
 });
 
-// // !debug only no auth
+// !debug only no auth
 // Route::prefix('types')->name('types.')->group(function () {
 //     Route::get('/', [TypeController::class, 'index'])->name('index');
 //     Route::post('/', [TypeController::class, 'store'])->name('store');
@@ -51,7 +51,7 @@ Route::prefix('types')->name('types.')->middleware(['auth', 'verified'])->group(
 // });
 
 // technologies
-Route::resource('technologies', TechnologyController::class);
+Route::resource('technologies', TechnologyController::class)->middleware(['auth', 'verified']);
 
 // custom delete image route
 Route::delete('projects/{project}/image', [ProjectController::class, 'destroyImage'])->name('projects.destroyImage');
