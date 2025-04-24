@@ -16,10 +16,6 @@ class ProjectController extends Controller
             'results' => $projects,
             'success' => true
         ]);
-
-        // dd(response()->json($projects));
-
-        return response()->json($projects);
     }
 
     public function show(Project $project)
