@@ -76,7 +76,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Elimnando l'immagine questa non sarà più disponibile</p>
+                    <p>Eliminando l'immagine questa non sarà più disponibile</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
