@@ -106,12 +106,6 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $request->all(); //array associativo
-        // $path = $request->file('image')->store('projects', 'public');
-        // dd([
-        //     'storage_path' => storage_path(),
-        //     'stored_path' => $path,
-        //     'public_url' => asset('storage/' . $path),
-        // ]);
 
         // dd($data);
 
@@ -119,8 +113,6 @@ class ProjectController extends Controller
         $project->customer = $data['customer'];
         $project->description = $data['description'];
         $project->type_id = $data['type_id'];
-
-
 
         $newSlug = Project::generateSlug($project['name']);
 
@@ -138,14 +130,21 @@ class ProjectController extends Controller
             }
         }
 
-        if (isset($data['image'])) {
-            $project->image = $data['image'];
-            // $img_url = Storage::disk('public')->put('uploads', $data['image']);
+        if ($project->image && $data['image']) {
+            // dd('vecchia immagine presente');
+            // se esiste l'immagine e non è null allora elimino l'immagine precedente dallo storage locale
+            Storage::delete($project->image);
+            $project->image = Storage::putFile('uploads', $data['image']);
+        } else if (isset($data['image'])) {
+
+            // dd('nuova immagine');
             $img_url = Storage::putFile('uploads', $data['image']);
+            // Storage::putFile('uploads', $data['image']);
 
             $project->image = $img_url;
         }
 
+        // dd($project);
         $project->update();
 
         if ($request->has('technologies')) {
