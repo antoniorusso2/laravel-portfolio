@@ -19,9 +19,9 @@ return [
 
     'allowed_methods' => ['GET'],
 
-    'allowed_origins' => [env('APP_URL', 'http://localhost')],
+    'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => [env('FRONTEND_URL', 'APP_URL')],
 
     'allowed_headers' => ['*'],
 
