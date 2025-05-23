@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
@@ -86,6 +87,8 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         // dd($project->technologies);
+        // project media
+        $project->load('media');
         return view('admin.projects.show', compact('project'));
     }
 
@@ -130,22 +133,22 @@ class ProjectController extends Controller
             }
         }
 
-        if ($project->image && $data['image']) {
-            // dd('vecchia immagine presente');
-            // se esiste l'immagine e non è null allora elimino l'immagine precedente dallo storage locale
-            Storage::delete($project->image);
-            $project->image = Storage::putFile('uploads', $data['image']);
-        } else if (isset($data['image'])) {
+        // if ($project->image && $data['image']) {
+        //     // dd('vecchia immagine presente');
+        //     // se esiste l'immagine e non è null allora elimino l'immagine precedente dallo storage locale
+        //     Storage::delete($project->image);
+        //     $project->image = Storage::putFile('uploads', $data['image']);
+        // } else if (isset($data['image'])) {
 
-            // dd('nuova immagine');
-            $img_url = Storage::putFile('uploads', $data['image']);
-            // Storage::putFile('uploads', $data['image']);
+        //     // dd('nuova immagine');
+        //     $img_url = Storage::putFile('uploads', $data['image']);
+        //     // Storage::putFile('uploads', $data['image']);
 
-            $project->image = $img_url;
-        }
+        //     $project->image = $img_url;
+        // }
 
-        // dd($project);
-        $project->update();
+        dd($project);
+        // $project->update();
 
         if ($request->has('technologies')) {
             $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati

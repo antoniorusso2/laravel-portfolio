@@ -1,14 +1,40 @@
-@props(['items' => []])
+@props(['items' => [], 'width' => 'w-100'])
 
-<div id="mediaCarousel" class="carousel slide col-12 col-md-6">
-    <div class="carousel-inner ">
-        @foreach ($items as $media)
-            <div class="carousel-item active">
+<div
+    id="carouselExampleIndicators"
+    class="carousel slide {{ $width }}"
+    data-bs-ride="carousel"
+>
+    <div class="carousel-indicators">
+        <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+        ></button>
+        <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+        ></button>
+        <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+        ></button>
+    </div>
+    <div class="carousel-inner">
+        @foreach ($items as $item)
+            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                 <img
-                    src="{{ $media->url }}"
-                    onerror="this.src='https://placehold.co/600x400';"
+                    {{-- src="{{ asset('storage/' . $item->image) }}" --}}
+                    src="{{ $item->url }}"
                     class="d-block w-100"
-                    alt="immagini progetto"
+                    alt="..."
                 >
             </div>
         @endforeach
@@ -16,16 +42,16 @@
     <button
         class="carousel-control-prev"
         type="button"
-        data-bs-target="#mediaCarousel"
+        data-bs-target="#carouselExampleIndicators"
         data-bs-slide="prev"
     >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
     <button
-        class="carousel-control-next text-light"
+        class="carousel-control-next"
         type="button"
-        data-bs-target="#mediaCarousel"
+        data-bs-target="#carouselExampleIndicators"
         data-bs-slide="next"
     >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>

@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
             [
                 TypesSeeder::class,
                 ProjectsSeeder::class,
-                TechnologiesSeeder::class
+                TechnologiesSeeder::class,
+                MediaSeeder::class
             ]
         );
     }
