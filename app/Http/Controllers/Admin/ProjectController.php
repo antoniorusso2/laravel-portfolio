@@ -41,45 +41,48 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all(); //array associativo
+        $data = $request->all();
 
-        // dd($data);
-
-        $newProject = new Project(); //istanza del modello
-
+        // 1. Crea progetto
+        $newProject = new Project();
         $newProject->name = $data['name'];
         $newProject->customer = $data['customer'];
         $newProject->description = $data['description'];
-
-        if (isset($data['image'])) {
-
-            $newProject->image = $data['image'];
-            $img_url = Storage::disk('public')->put('uploads', $data['image']);
-
-            $newProject->image = $img_url;
-        }
-
-        // echo asset('storage/' . $img_url);
-
         $newProject->type_id = $data['type_id'];
+        $newProject->slug = Project::generateSlug($newProject->name);
 
-        // dd($newProject);
-
-        // creazione slug
-        $newProject['slug'] = Project::generateSlug($newProject['name']);
-
-        if (Project::all()->contains('slug', $newProject['slug'])) {
-            // se esiste un progetto con lo stesso slug
+        // Evita duplicati
+        if (Project::where('slug', $newProject->slug)->exists()) {
             return 'Progetto omonimo già esistente';
-        } else {
-            $newProject->save();
-
-            $newProject->technologies()->attach($data['technologies']); //dopo aver salvato il record si va ad interagire con la tabella pivot
-            // dd($newProject);
-
-            return redirect(route('projects.show', $newProject));
         }
+
+        $newProject->save();
+
+        // 2. Aggiunge tecnologie
+        $newProject->technologies()->attach($data['technologies'] ?? []);
+
+        // 3. Salva media (immagini/video)
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $file) {
+                // Salva il file in storage/public/uploads/media
+                $path = $file->store('uploads/media', 'public');
+
+                // Determina tipo mime
+                $mime = $file->getMimeType();
+                $type = str_starts_with($mime, 'image/') ? 'image' : 'video';
+
+                // Salva media nel DB
+                $media = new Media();
+                $media->url = $path;
+                $media->type = $type;
+                $media->project_id = $newProject->id;
+                $media->save();
+            }
+        }
+
+        return redirect(route('projects.show', $newProject));
     }
+
 
     /**
      * Display the specified resource.

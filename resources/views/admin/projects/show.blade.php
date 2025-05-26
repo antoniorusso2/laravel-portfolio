@@ -15,7 +15,12 @@
             <div class="col-4 pt-3 justify-content-end d-flex justify-content-end align-items-start gap-2">
                 <a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a>
                 {{-- form per l'eliminazione --}}
-                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                >
                     Elimina
                 </button>
             </div>
@@ -35,9 +40,16 @@
                     </ul>
                 </div>
             @endif
-            <div class="col-12 col-md-6">
-                <img src='{{ asset('storage/' . $project->image) }}' onerror="this.src='https://placehold.co/600x400';" alt="immagine progetto" class="card-img-top">
-            </div>
+
+            {{-- images --}}
+            @if ($project->media->count() > 0)
+                <x-media-carousel :items="$project->media" :width="'col-12 col-md-6'" />
+            @else
+                <div class="col-12 col-md-6">
+                    <p>Non sono presenti immagini</p>
+                </div>
+            @endif
+
             <div class="col-12 col-md-6">
                 <p>{{ $project->description }}</p>
             </div>

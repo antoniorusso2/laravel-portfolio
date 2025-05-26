@@ -1,39 +1,38 @@
 @props(['items' => [], 'width' => 'w-100'])
 
+<style>
+    .img-fit {
+        object-fit: cover;
+        object-position: center;
+        height: 400px;
+        width: 100%;
+    }
+</style>
+
 <div
     id="carouselExampleIndicators"
     class="carousel slide {{ $width }}"
     data-bs-ride="carousel"
 >
     <div class="carousel-indicators">
-        <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-        ></button>
-        <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-        ></button>
-        <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-        ></button>
+        @foreach ($items as $item)
+            <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="{{ $loop->index }}"
+                class="{{ $loop->first ? 'active' : '' }}"
+                aria-current="{{ $loop->first ? 'true' : 'false' }}"
+                aria-label="Slide {{ $loop->index + 1 }}"
+            ></button>
+        @endforeach
     </div>
     <div class="carousel-inner">
         @foreach ($items as $item)
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                 <img
-                    {{-- src="{{ asset('storage/' . $item->image) }}" --}}
-                    src="{{ $item->url }}"
-                    class="d-block w-100"
+                    src="{{ asset('storage/' . $item->url) }}"
+                    {{-- src="{{ $item->url }}" --}}
+                    class="img-fit d-block"
                     alt="..."
                 >
             </div>
