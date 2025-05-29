@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMediaRequest;
 use App\Http\Requests\UpdateMediaRequest;
 use App\Models\Media;
+use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
@@ -61,6 +63,13 @@ class MediaController extends Controller
      */
     public function destroy(Media $media)
     {
-        //
+
+        if (Storage::exists($media->url)) {
+            Storage::delete($media->url);
+        }
+
+        $media->delete();
+
+        return redirect(route('projects.show', $media->project));
     }
 }

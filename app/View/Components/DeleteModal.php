@@ -7,17 +7,20 @@ use App\Models\Technology;
 use App\Models\Type;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 
 class DeleteModal extends Component
 {
-    public Type | Project | Technology $item;
+
+    public Model $item;
+
     public string $route;
 
     /**
      * Create a new component instance.
      */
-    public function __construct(Type | Project | Technology $item, string $route)
+    public function __construct(Model $item, string $route)
     {
         $this->item = $item;
         $this->route = $route;

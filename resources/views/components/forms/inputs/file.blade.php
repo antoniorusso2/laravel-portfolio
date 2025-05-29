@@ -1,3 +1,1 @@
-<div>
-    <!-- Happiness is not something readymade. It comes from your own actions. - Dalai Lama -->
-</div>
+<input type="file" {{ $attributes->merge(['class' => 'form-control']) }}>

@@ -89,9 +89,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        // dd($project->technologies);
-        // project media
+
         $project->load('media');
+
         return view('admin.projects.show', compact('project'));
     }
 
@@ -136,22 +136,26 @@ class ProjectController extends Controller
             }
         }
 
-        // if ($project->image && $data['image']) {
-        //     // dd('vecchia immagine presente');
-        //     // se esiste l'immagine e non è null allora elimino l'immagine precedente dallo storage locale
-        //     Storage::delete($project->image);
-        //     $project->image = Storage::putFile('uploads', $data['image']);
-        // } else if (isset($data['image'])) {
+        // $project->update();
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $file) {
+                // Salva il file in storage/public/uploads/media
+                $path = $file->store('uploads/media', 'public');
 
-        //     // dd('nuova immagine');
-        //     $img_url = Storage::putFile('uploads', $data['image']);
-        //     // Storage::putFile('uploads', $data['image']);
+                // Determina tipo mime
+                $mime = $file->getMimeType();
+                $type = str_starts_with($mime, 'image/') ? 'image' : 'video';
 
-        //     $project->image = $img_url;
-        // }
+                // Salva media nel DB
+                $media = new Media();
+                $media->url = $path;
+                $media->type = $type;
+                $media->project_id = $project->id;
+                $media->save();
+            }
+        }
 
         dd($project);
-        // $project->update();
 
         if ($request->has('technologies')) {
             $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
@@ -176,17 +180,5 @@ class ProjectController extends Controller
 
         $project->delete();
         return redirect(route('projects.index'));
-    }
-
-    public function destroyImage(Project $project)
-    {
-        // ??temporary bin in storage future update
-        if (Storage::has($project->image)) {
-            Storage::delete($project->image);
-        }
-
-        $project->image = null;
-        $project->update();
-        return redirect(route('projects.edit', $project));
     }
 }
