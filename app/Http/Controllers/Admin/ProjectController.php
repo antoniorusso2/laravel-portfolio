@@ -155,7 +155,7 @@ class ProjectController extends Controller
             }
         }
 
-        dd($project);
+        // dd($project);
 
         if ($request->has('technologies')) {
             $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati

@@ -70,6 +70,6 @@ class MediaController extends Controller
 
         $media->delete();
 
-        return redirect(route('projects.show', $media->project));
+        return back()->with('success', 'Immagine eliminata con successo');
     }
 }
