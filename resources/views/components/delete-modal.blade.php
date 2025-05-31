@@ -1,11 +1,11 @@
-@props(['route', 'item', 'type' => 'item'])
+@props(['route', 'item', 'trigger' => ''])
 
 <!-- Modal -->
 <div
     class="modal fade"
-    id="{{ $type }}DeleteModal{{ $item->id }}"
+    id="{{ $trigger }}DeleteModal{{ $item->id }}"
     tabindex="-1"
-    aria-labelledby="{{ $type }}DeleteModal"
+    aria-labelledby="{{ $trigger }}DeleteModal"
     aria-hidden="true"
 >
     <div class="modal-dialog">
@@ -20,13 +20,18 @@
                 ></button>
             </div>
             <div class="modal-body">
-                ...
+                Una volta eliminato non sarà possibile ripristinarlo.
             </div>
             <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >Annulla</button>
                 <form method="POST" action="{{ $route }}">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger">Elimina</button>
+                    <button type="submit" class="btn btn-danger">Elimina</button>
                 </form>
             </div>
         </div>

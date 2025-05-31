@@ -15,14 +15,9 @@
             <div class="col-4 pt-3 justify-content-end d-flex justify-content-end align-items-start gap-2">
                 <a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a>
                 {{-- form per l'eliminazione --}}
-                <button
-                    type="button"
-                    class="btn btn-outline-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#itemDeleteModal{{ $project->id }}"
-                >
+                <x-ui.buttons.delete :trigger="'project'" :item="$project">
                     Elimina
-                </button>
+                </x-ui.buttons.delete>
             </div>
 
             {{-- tech stack --}}
@@ -57,5 +52,9 @@
     </div>
 
     {{-- delete modal --}}
-    <x-delete-modal :route="route('projects.destroy', $project)" :item="$project" />
+    <x-delete-modal
+        :trigger="'project'"
+        :route="route('projects.destroy', $project)"
+        :item="$project"
+    />
 @endsection

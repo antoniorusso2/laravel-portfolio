@@ -15,7 +15,9 @@
             <div class="col">
                 <a href="{{ route('technologies.edit', $technology) }}" class="btn btn-outline-warning">Modifica</a>
                 {{-- form per l'eliminazione --}}
-                <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Elimina</button">
+                <x-ui.buttons.delete :trigger="'technology'" :item="$technology">
+                    Elimina
+                </x-ui.buttons.delete>
             </div>
         </div>
         <div class="row row-gap-3 description">
@@ -25,6 +27,10 @@
         </div>
     </div>
 
-    <x-delete-modal :route="route('technologies.destroy', $technology)" :item="$technology" />
+    <x-delete-modal
+        :trigger="'technology'"
+        :route="route('technologies.destroy', $technology)"
+        :item="$technology"
+    />
 
 @endsection
