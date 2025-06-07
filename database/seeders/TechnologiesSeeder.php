@@ -34,7 +34,7 @@ class TechnologiesSeeder extends Seeder
 
             $newTechnology->name = $technology;
             $newTechnology->color = $faker->hexColor;
-            $newTechnology->icon = $faker->emoji;
+            $newTechnology->icon_url = $faker->url();
 
             $newTechnology->save();
         }

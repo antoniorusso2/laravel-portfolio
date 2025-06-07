@@ -12,7 +12,7 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
 
-        $projects->load('type', 'technologies');
+        $projects->load('type', 'technologies', 'media');
 
         return response()->json([
             'success' => true,

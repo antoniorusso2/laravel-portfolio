@@ -72,6 +72,7 @@ class TechnologyController extends Controller
 
         $technology->name = $data['name'];
         $technology->color = $data['color'];
+        $technology->icon_url = $data['icon'];
 
         $technology->save();
 
