@@ -1,14 +1,21 @@
 <x-app-layout>
-    <div class="container ">
-        {{-- @dd(route('types.create')) --}}
-        <a href="{{ route('types.create') }}" class="btn btn-primary mb-3">Crea nuova tipologia</a>
+    {{-- @dd($types) --}}
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Tipologie progetti') }}
+        </h2>
+    </x-slot>
+    <div class="container">
+
+        <a class="btn special" href="{{ route('types.create') }}">Aggiungi una nuova tipologia</a>
+
     </div>
-    <div class="container mt-3">
-        <div class="row row-gap-3">
+
+    <div class="container">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
+            {{-- @dd($types) --}}
             @foreach ($types as $type)
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <x-type-card :$type />
-                </div>
+                <x-card :item="$type" :route="route('types.show', $type)" />
             @endforeach
         </div>
     </div>
