@@ -190,6 +190,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         // se l'immagine esiste ed è diversa da null in questo punto allora controllo se esiste in local storage e la elimino anche dallo storage locale
+        dd("delete", $project);
         if ($project->image && Storage::exists($project->image)) {
             Storage::delete($project->image);
             // dd('immagine presente in local storage');

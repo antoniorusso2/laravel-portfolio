@@ -20,9 +20,6 @@ class DashboardController extends Controller
         $technologies = Technology::all();
         $types = Type::all();
 
-        // dd($projects);
-
-        // dd($user);
         return view('dashboard', compact('user_id', 'projects', 'technologies', 'types'));
     }
 }
