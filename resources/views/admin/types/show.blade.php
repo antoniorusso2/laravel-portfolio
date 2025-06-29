@@ -1,30 +1,29 @@
 <x-app-layout>
     <div class="container">
-        <div class="row flex-wrap mb-5">
-            <div class="col-12">
-                <h2 class="text-capitalize my-4 fs-1">
-                    Tipologia {{ $type->name }}
-                </h2>
-            </div>
-            <div class="col">
-                <a href="{{ route('types.edit', $type) }}" class="btn btn-outline-warning">Modifica</a>
-                {{-- form per l'eliminazione --}}
-                <x-ui.buttons.delete :trigger="'type'" :item="$type">
-                    Elimina
-                </x-ui.buttons.delete>
-            </div>
-        </div>
-        <div class="row row-gap-3 description">
-            <div class="col-12 col-md-6 fs-3">
-                <p>{{ $type->description }}</p>
-            </div>
+        <div class="flex gap-4 w-full justify-start flex-wrap">
+            <a class="btn special" href="{{ route('types.index') }}">Indietro</a>
+            <a class="btn special" href="{{ route('types.edit', $type) }}">Modifica</a>
+
+            {{-- delete --}}
+            <button
+                class="btn special delete md:ms-auto"
+                id="modal-trigger"
+                x-data=""
+                x-on:click.prevent="$dispatch('open-modal', 'confirm-type-deletion')"
+            >Elimina</button>
         </div>
     </div>
 
+    <div class="container">
+        <h1 class="text-4xl">{{ $type->name }}</h1>
+        <p class="text-thin mt-8">- {{ $type->description }}</p>
+    </div>
+
+    {{-- modal --}}
     <x-delete-modal
-        :trigger="'type'"
-        :route="route('types.destroy', $type)"
+        :type="'type'"
         :item="$type"
+        :action="route('types.destroy', $type)"
     />
 
 </x-app-layout>

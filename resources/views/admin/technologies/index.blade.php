@@ -1,13 +1,17 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Tecnologie') }}
+        </h2>
+    </x-slot>
     <div class="container">
-        <a href="{{ route('technologies.create') }}" class="btn btn-primary mb-3">Crea nuovo linguaggio o framework</a>
+        <a class="btn special" href="{{ route('technologies.create') }}">Aggiungi una nuova tecnologia</a>
     </div>
-    <div class="container mt-3">
-        <div class="row row-gap-3">
+
+    <div class="container">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
             @foreach ($technologies as $technology)
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <x-technology-card :$technology />
-                </div>
+                <x-card :item="$technology" :route="route('technologies.show', $technology)" />
             @endforeach
         </div>
     </div>

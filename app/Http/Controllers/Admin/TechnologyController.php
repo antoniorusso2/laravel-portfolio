@@ -86,6 +86,7 @@ class TechnologyController extends Controller
     {
         // eliminazione del valore nella colonna technology id dalla tabella pivot
 
+        dd("delete", $technology);
 
         $technology->delete();
 

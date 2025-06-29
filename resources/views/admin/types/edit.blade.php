@@ -1,43 +1,49 @@
 <x-app-layout>
-    <div class="container">
-        <div class="row flex-wrap mb-5">
-            <div class="col-12">
-                <h2 class="text-capitalize my-4 fs-1">
-                    Modifica Tipologia
-                </h2>
-            </div>
-            <div class="col">
-                <a href="{{ route('types.index') }}" class="btn btn-outline-primary">Indietro</a>
-            </div>
-        </div>
-        <div class="row row-gap-3 description">
-            <div class="col-12 col-md-6 fs-3">
-                <form action="{{ route('types.update', $type) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nome</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="name"
-                            name="name"
-                            value="{{ $type->name }}"
-                        >
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Descrizione</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="description"
-                            name="description"
-                            value="{{ $type->description }}"
-                        >
-                    </div>
-                    <button type="submit" class="btn btn-primary">Modifica</button>
-                </form>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+            {{ __('Modifica tipologia') }}
+        </h2>
+    </x-slot>
+
+    <section class="cta">
+        <div class="container">
+            <div class="flex justify-between">
+                <a class="btn special" href="{{ route('types.index') }}">Indietro</a>
+
+                {{-- delete --}}
+                <button
+                    class="btn special delete md:ms-auto"
+                    id="modal-trigger"
+                    x-data=""
+                    x-on:click.prevent="$dispatch('open-modal', 'confirm-type-deletion')"
+                >Elimina</button>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section class="modify_form">
+        <div class="container">
+            <form
+                class="mx-auto flex w-full flex-col items-start justify-center gap-4"
+                action="{{ route('types.update', $type) }}"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                @csrf
+                @method('PUT')
+
+                {{-- name --}}
+                <x-forms.form-field field="name" label="Nome progetto">
+                    <x-forms.inputs.text name="name" value="{{ old('name', $type->name) }}" />
+                </x-forms.form-field>
+
+                {{-- description --}}
+                <x-forms.form-field field="description" label="Descrizione">
+                    <x-forms.inputs.text name="description" value="{{ old('description', $type->description) }}" />
+                </x-forms.form-field>
+
+                <button class="btn special ms-auto" type="submit">Modifica</button>
+            </form>
+        </div>
+    </section>
 </x-app-layout>

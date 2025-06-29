@@ -1,32 +1,31 @@
 <x-app-layout>
     <div class="container">
-        <div class="row flex-wrap align-items-center mb-5 row-gap-3">
-            <div class="col-12">
-                <h2 class="text-capitalize my-4 fs-1">
-                    {{ $technology->name }}
-                    <div class="badge rounded-pill" style="background-color: {{ $technology->color }}">{{ $technology->name }}</div>
-                </h2>
-            </div>
+        <div class="flex gap-4 w-full justify-start flex-wrap">
+            <a class="btn special" href="{{ route('technologies.index') }}">Indietro</a>
+            <a class="btn special" href="{{ route('technologies.edit', $technology) }}">Modifica</a>
 
-            <div class="col">
-                <a href="{{ route('technologies.edit', $technology) }}" class="btn btn-outline-warning">Modifica</a>
-                {{-- form per l'eliminazione --}}
-                <x-ui.buttons.delete :trigger="'technology'" :item="$technology">
-                    Elimina
-                </x-ui.buttons.delete>
-            </div>
-        </div>
-        <div class="row row-gap-3 description">
-            <div class="col-12 col-md-6 fs-3">
-                <p>{{ $technology->description }}</p>
-            </div>
+            {{-- delete --}}
+            <button
+                class="btn special delete ms-auto"
+                id="modal-trigger"
+                x-data=""
+                x-on:click.prevent="$dispatch('open-modal', 'confirm-technology-deletion')"
+            >Elimina</button>
         </div>
     </div>
 
+    <div class="container">
+        <h1 class="text-4xl">{{ $technology->name }}</h1>
+        <div class="badge my-4 text-xl flex gap-4">
+            Colore: <span class="block badge p-3 w-16" style="background-color: {{ $technology->color }}"></span>
+        </div>
+    </div>
+
+    {{-- modal --}}
     <x-delete-modal
-        :trigger="'technology'"
-        :route="route('technologies.destroy', $technology)"
+        :type="'technology'"
         :item="$technology"
+        action="{{ route('technologies.destroy', $technology) }}"
     />
 
 </x-app-layout>

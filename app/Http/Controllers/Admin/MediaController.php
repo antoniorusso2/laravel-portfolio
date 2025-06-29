@@ -64,6 +64,8 @@ class MediaController extends Controller
     public function destroy(Media $media)
     {
 
+        dd("delete", $media);
+
         if (Storage::exists($media->url)) {
             Storage::delete($media->url);
         }
