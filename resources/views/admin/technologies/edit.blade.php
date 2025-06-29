@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Modifica Linguaggio o Framework')
-
-@section('content')
+<x-app-layout>
     <div class="container">
         <div class="row flex-wrap align-items-center mb-5 row-gap-3">
             <div class="col-12">
@@ -62,4 +58,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>

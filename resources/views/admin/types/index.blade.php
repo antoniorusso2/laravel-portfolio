@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Tipologie per i progetti')
-
-@section('content')
+<x-app-layout>
     <div class="container ">
         {{-- @dd(route('types.create')) --}}
         <a href="{{ route('types.create') }}" class="btn btn-primary mb-3">Crea nuova tipologia</a>
@@ -16,4 +12,4 @@
             @endforeach
         </div>
     </div>
-@endsection
+</x-app-layout>

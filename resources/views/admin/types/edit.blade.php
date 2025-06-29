@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Modifica Tipologia')
-
-@section('content')
+<x-app-layout>
     <div class="container">
         <div class="row flex-wrap mb-5">
             <div class="col-12">
@@ -21,15 +17,27 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $type->name }}">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            value="{{ $type->name }}"
+                        >
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Descrizione</label>
-                        <input type="text" class="form-control" id="description" name="description" value="{{ $type->description }}">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            value="{{ $type->description }}"
+                        >
                     </div>
                     <button type="submit" class="btn btn-primary">Modifica</button>
                 </form>
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>

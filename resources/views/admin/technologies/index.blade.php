@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Linguaggi e Framework')
-
-@section('content')
+<x-app-layout>
     <div class="container">
         <a href="{{ route('technologies.create') }}" class="btn btn-primary mb-3">Crea nuovo linguaggio o framework</a>
     </div>
@@ -15,4 +11,4 @@
             @endforeach
         </div>
     </div>
-@endsection
+</x-app-layout>

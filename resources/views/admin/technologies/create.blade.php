@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Crea Linguaggio o Framework')
-
-@section('content')
+<x-app-layout>
     <div class="container">
         <div class="row flex-wrap mb-5">
             <div class="col-12">
@@ -20,15 +16,25 @@
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                        >
                     </div>
                     <div class="mb-3 d-block">
                         <label for="color" class="form-label">Colore</label>
-                        <input type="color" class="form-control w-25" id="color" name="color">
+                        <input
+                            type="color"
+                            class="form-control w-25"
+                            id="color"
+                            name="color"
+                        >
                     </div>
                     <button type="submit" class="btn btn-primary">Crea</button>
                 </form>
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>

@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', $type->name)
-
-@section('content')
+<x-app-layout>
     <div class="container">
         <div class="row flex-wrap mb-5">
             <div class="col-12">
@@ -31,4 +27,4 @@
         :item="$type"
     />
 
-@endsection
+</x-app-layout>

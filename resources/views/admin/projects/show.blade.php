@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', $project->name)
-
-@section('content')
+<x-app-layout>
     <div class="container mt-5">
         <div class="row row-gap-3">
             <div class="col-8">
@@ -57,4 +53,5 @@
         :route="route('projects.destroy', $project)"
         :item="$project"
     />
-@endsection
+
+</x-app-layout>

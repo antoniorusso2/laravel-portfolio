@@ -1,6 +1,4 @@
-@extends('layouts.app')
-@section('title', 'Dashboard')
-@section('content')
+<x-app-layout>
     <div class="container">
         <h2 class="fs-4 text-secondary my-4">
             {{ __('Dashboard') }}
@@ -26,4 +24,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>
