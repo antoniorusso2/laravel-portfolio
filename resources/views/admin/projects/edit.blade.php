@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Modifica Progetto')
-
-@section('content')
+<x-app-layout>
     <div class="container mt-3">
         <div class="row row-gap-3 align-items-center">
 
@@ -15,19 +11,19 @@
         <div class="row">
 
             <div class="col-12">
-                @livewire('project-form', ['project' => $project, 'types' => $types, 'technologies' => $technologies, 'media' => $project->media])
+
             </div>
         </div>
     </div>
 
-    <x-delete-modal :route="route('projects.destroy', $project)" :item="$project" />
+    {{-- <x-delete-modal :route="route('projects.destroy', $project)" :item="$project" /> --}}
 
-    @foreach ($project->media as $media)
+    {{-- @foreach ($project->media as $media)
         <x-delete-modal
             :type="'media'"
             :route="route('media.destroy', $media)"
             :item="$media"
         />
-    @endforeach
+    @endforeach --}}
 
-@endsection
+</x-app-layout>
