@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FilterProjectRequest;
 use App\Models\Media;
 use App\Models\Project;
 use App\Models\Technology;
@@ -15,10 +16,26 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(FilterProjectRequest $request)
     {
-        //return all posts
-        $projects = Project::all();
+        $limit = $request->limit ?? 4;
+
+        $filters = $request->validate([
+            'filter' => 'nullable|string|max:50',
+            'type_id' => 'nullable'
+        ]);
+
+        $query = Project::query();
+
+        if (!empty($filters['type_id'])) {
+            $query->where('type_id', $request->type_id);
+        }
+
+        if (!empty($filters['filter'])) {
+            $query->where('name', 'like', '%' . $request->filter . '%');
+        }
+
+        $projects = $query->orderby('name', 'asc')->paginate($limit);
 
         return view('admin.projects.index', compact('projects'));
     }

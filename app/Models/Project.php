@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasModelRoutes;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
     // protected $fillable = ['name', 'slug', 'description'];
+    use HasModelRoutes;
 
     public function type()
     {
