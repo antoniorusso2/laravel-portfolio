@@ -172,14 +172,13 @@ class ProjectController extends Controller
             }
         }
 
-        // dd($project);
+        $project->update();
 
         if ($request->has('technologies')) {
             $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
         } else {
             $project->technologies()->detach();
         }
-
 
         return redirect(route('projects.show', $project));
     }

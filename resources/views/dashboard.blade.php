@@ -65,6 +65,7 @@
                 :list="$types"
                 :type="'types'"
                 :name="'Tipologie'"
+                :textClasses="'capitalize'"
             />
         </div>
     </div>

@@ -1,6 +1,7 @@
-@props(['list' => [], 'type' => null, 'name' => null])
+@props(['list' => [], 'type' => null, 'name' => null, 'textClasses' => ''])
 
 @php
+
     $routes = [
         'projects' => [
             'index' => 'projects.index',
@@ -54,11 +55,11 @@
                 @foreach ($list as $item)
                     <li class="flex items-center justify-between border-b border-gray-500">
                         {{-- link to show --}}
-                        <x-dropdown-link :href="route($routes[$type]['show'], $item)">{{ $item->name }}</x-dropdown-link>
+                        <x-dropdown-link :href="route($routes[$type]['show'], $item)" class="{{ $textClasses }}">{{ $item->name }}</x-dropdown-link>
 
                         <div class="cta ms-auto flex">
                             {{-- link to edit --}}
-                            <x-dropdown-link :href="route($routes[$type]['edit'], $item)">
+                            <x-dropdown-link :href="route($routes[$type]['edit'], $item)" class="me-2">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
