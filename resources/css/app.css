@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply dark:bg-gray-700 dark:text-gray-200 min-h-dvh flex flex-col;
+}
+
+select {
+    background-image: none;
+}
+
+.container {
+    @apply max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8;
+}
+
+.row {
+    @apply flex flex-wrap -mx-4 py-4 w-full;
+}
+
+.btn {
+    @apply border-2 border-gray-400 px-4 py-2;
+}
+
+.btn.special {
+    @apply rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm block max-w-max;
+}
+
+.btn.special:hover {
+    @apply border-indigo-400 text-gray-700  rounded-tr-xl rounded-bl-xl bg-gray-400;
+    @apply transition-all duration-200 ease-in-out;
+}
+
+.btn.special.delete {
+    @apply bg-rose-600 hover:bg-rose-700 text-white;
+}
+
+.form_section {
+    @apply text-lg text-gray-900 dark:text-white bg-slate-800 w-full py-2 px-4 rounded-md drop-shadow-xl flex items-center flex-wrap;
+}
+
+.my_label {
+    @apply block w-full mb-4 text-lg font-semibold text-gray-900 dark:text-white;
+}

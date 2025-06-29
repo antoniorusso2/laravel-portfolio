@@ -1,63 +1,71 @@
-@extends('layouts.app')
-@section('title', 'Dashboard')
-@section('content')
-    <div class="container">
-        <h2 class="fs-4 text-secondary my-4">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
             {{ __('Dashboard') }}
         </h2>
-        <div class="row justify-content-center">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">{{ __('User Dashboard') }}</div>
+    </x-slot>
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
 
-                        {{-- @dd($projects) --}}
+    <div class="container">
 
-                        @if (count($projects) > 0)
-                            <div class="row row-gap-3">
-                                <div class="col-12">
-                                    <h2 class="text-capitalize my-4 fs-1">
-                                        {{ Auth::user()->name }}
-                                    </h2>
-                                </div>
-                            </div>
+        {{-- filter --}}
+        <div class="w-full ">
+            <form method="GET" action="{{ route('projects.index') }}">
 
-                            <div class="cta row row-gap-3 align-items-center">
-                                <div class="col-12 d-flex jusitify-content-between">
-                                    <span>Totale <strong>Progetti:</strong> {{ count($projects) }}</span>
-                                    <div class="cta-btn ms-auto">
-                                        <a href="{{ route('projects.index') }}" class="btn btn-outline-warning">Modifica</a>
-                                    </div>
-                                    <hr>
-                                </div>
+                <div class="filter flex flex-col  md:flex-row md:items-end md:space-x-2">
+                    {{-- categoria --}}
+                    <div class="filter-field">
+                        <label for="category_id">
+                            Categoria
+                        </label>
+                        <x-forms.inputs.select
+                            name="category_id"
+                            :options="$technologies"
+                            :first-option="'Scegli categoria'"
+                        />
+                    </div>
 
-                                <div class="col-12 d-flex jusitify-content-between">
-                                    <span>Totale <strong>Tipologie</strong>: {{ count($types) }}</span>
-                                    <div class="cta-btn ms-auto">
-                                        <a href="{{ route('types.index') }}" class="btn btn-outline-warning">Modifica</a>
-                                    </div>
-                                    <hr>
-                                </div>
+                    {{-- ricerca per nome --}}
+                    <div class="filter-field md:w-1/4">
+                        <label for="filter">
+                            Nome
+                        </label>
 
-                                <div class="col-12 d-flex jusitify-content-between">
-                                    <span>Totale <strong>Linguaggi e framework</strong>: {{ count($technologies) }}</span>
-                                    <div class="cta-btn ms-auto">
-                                        <a href="{{ route('technologies.index') }}" class="btn btn-outline-warning">Modifica</a>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                        @endif
+                        <x-forms.inputs.text name="filter" placeholder="Inserisci il nome del piatto" />
+                    </div>
 
+
+                    {{-- Pulsante invio --}}
+                    <div class=" md:w-auto">
+                        <button type="submit" class="w-full md:w-auto inline-flex items-center justify-center px-4 py-2 mt-1 md:mt-0 bg-indigo-600 text-white font-medium text-sm rounded-md shadow hover:bg-indigo-700 transition">
+                            Filtra
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
+
+        <div class="mt-4">
+            {{-- projects --}}
+            <x-dashboard-dropdown
+                :list="$projects"
+                :type="'projects'"
+                :name="'Progetti'"
+            />
+
+            {{-- technologies --}}
+            <x-dashboard-dropdown
+                :list="$technologies"
+                :type="'technologies'"
+                :name="'Tecnologie'"
+            />
+
+            {{-- types --}}
+            <x-dashboard-dropdown
+                :list="$types"
+                :type="'types'"
+                :name="'Tipologie'"
+            />
         </div>
     </div>
-@endsection
+</x-app-layout>
