@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        $limit = $request->limit ?? 4;
+
+
+
+        $query = Project::query();
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        $projects = $query->paginate(4);
 
         $projects->load('type', 'technologies', 'media');
 
@@ -22,9 +32,11 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+        $project->load('type', 'technologies', 'media');
+
         return response()->json([
             'success' => true,
-            'result' => $project
+            'results' => $project
         ]);
     }
 }

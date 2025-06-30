@@ -29,4 +29,9 @@ class Project extends Model
     {
         return $this->hasMany(Media::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

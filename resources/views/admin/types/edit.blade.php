@@ -15,7 +15,7 @@
                     class="btn special delete md:ms-auto"
                     id="modal-trigger"
                     x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-type-deletion')"
+                    x-on:click.prevent="$dispatch('open-modal', 'delete-type-{{ $type->id }}')"
                 >Elimina</button>
             </div>
         </div>
@@ -45,5 +45,12 @@
                 <button class="btn special ms-auto" type="submit">Modifica</button>
             </form>
         </div>
+
+        {{-- modals --}}
+        <x-delete-modal
+            :type="'type'"
+            :item="$type"
+            :action="route('types.destroy', $type)"
+        />
     </section>
 </x-app-layout>

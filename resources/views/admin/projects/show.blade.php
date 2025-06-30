@@ -29,27 +29,66 @@
         </div>
 
         <hr class="my-4">
-        @if ($project->media->count() > 0)
-            <div class="wrap flex flex-wrap gap-3 my-4">
-                @foreach ($project->media as $media)
-                    @if ($media->type === 'image')
-                        <img src="{{ asset('storage/' . $media->url) }}" class="object-contain">
-                    @elseif ($media->type === 'video')
-                        <video
-                            src="{{ asset('storage/' . $media->url) }}"
-                            controls
-                            class=""
-                        ></video>
-                    @endif
-                @endforeach
-            </div>
-        @endif
 
+        {{-- description --}}
         @if ($project->description)
             <div class="description">
                 <p>{{ $project->description }}</p>
             </div>
         @endif
+
+        {{-- carousel media --}}
+
+        @if ($project->media->count() > 0)
+            <div data-carousel class="relative w-full mx-auto overflow-hidden shadow-lg  py-5">
+                <div class="media-wrapper relative h-96">
+                    @foreach ($project->media as $index => $media)
+                        <div class="media-slide absolute inset-0 transition-opacity duration-500 " data-index="{{ $index }}">
+                            @if ($media->type === 'image')
+                                <img
+                                    src="{{ asset('storage/' . $media->url) }}"
+                                    class="w-full h-full object-top object-cover"
+                                    alt="Media {{ $index + 1 }}"
+                                />
+                            @elseif ($media->type === 'video')
+                                <video
+                                    src="{{ asset('storage/' . $media->url) }}"
+                                    controls
+                                    class="w-full h-full object-contain"
+                                ></video>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
+                <button
+                    type="button"
+                    class="carousel-prev absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-20"
+                    aria-label="Previous"
+                >
+                    ‹
+                </button>
+                <button
+                    type="button"
+                    class="carousel-next absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full z-20"
+                    aria-label="Next"
+                >
+                    ›
+                </button>
+
+                <div class="carousel-dots flex justify-center gap-2 mt-4">
+                    @foreach ($project->media as $index => $media)
+                        <button
+                            type="button"
+                            class="dot w-3 h-3 rounded-full cursor-pointer {{ $index === 0 ? 'bg-cyan-600' : 'bg-gray-300' }}"
+                            data-index="{{ $index }}"
+                            aria-label="Go to slide {{ $index + 1 }}"
+                        ></button>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
     </div>
 
     {{-- project technologies --}}
