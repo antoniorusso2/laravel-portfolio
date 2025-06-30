@@ -1,10 +1,9 @@
-@props(['trigger' => '', 'item'])
+@props(['itemToDelete' => null, 'id' => ''])
 
 <button
     type="button"
-    class="btn btn-outline-danger"
-    data-bs-toggle="modal"
-    data-bs-target="#{{ $trigger }}DeleteModal{{ $item->id }}"
+    x-data=""
+    x-on:click.prevent="$dispatch('open-modal', 'delete-{{ $itemToDelete }}-{{ $id }}')"
 >
     {{ $slot }}
 </button>

@@ -1,6 +1,4 @@
-@props(['item', 'action', 'type' => null])
-
-
+@props(['item', 'action', 'type' => null, 'id' => null])
 @php
     // dd($type);
 
@@ -12,7 +10,6 @@
     ];
 
     $alerts = [
-        'project' => 'Una volta eliminato non sarà più disponibile!',
         'image' => 'Una volta eliminata non sarà più disponibile!',
         'type' => 'Una volta eliminata non sarà più disponibile!',
         'technology' => 'Una volta eliminata non sarà più disponibile!',
@@ -23,14 +20,14 @@
 
 @endphp
 
-<x-modal name="confirm-{{ $type }}-deletion" focusable>
+<x-modal name="delete-{{ $type }}-{{ $item->id }}" focusable>
     <form
         method="post"
         action="{{ $action }}"
         class="p-6"
     >
         @csrf
-        @method('delete')
+        @method('DELETE')
 
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ $messages[$type] ?? $messageFallback }}

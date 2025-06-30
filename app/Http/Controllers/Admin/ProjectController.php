@@ -128,14 +128,19 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $data = $request->all(); //array associativo
+        // dd($request->all());
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'required|string',
+            'technologies' => 'nullable|array',
+            'type_id' => 'nullable|exists:types,id',
+            // array di file
+            'media' => 'nullable|array',
 
-        // dd($data);
+            // regole per ogni file
+            'media.*' => 'file|mimes:jpg,jpeg,png,webp,mp4,webm|max:5120',
+        ]); //array associativo
 
-        $project->name = $data['name'];
-        $project->customer = $data['customer'];
-        $project->description = $data['description'];
-        $project->type_id = $data['type_id'];
 
         $newSlug = Project::generateSlug($project['name']);
 
@@ -153,9 +158,19 @@ class ProjectController extends Controller
             }
         }
 
-        // $project->update();
-        if ($request->hasFile('media')) {
-            foreach ($request->file('media') as $file) {
+        // dd($validated);
+        $project->update($validated);
+
+        // dd($validated['media']);
+        // 3. Salva media (immagini/video)
+        if ($validated['media']) {
+            dump('create media');
+            $medias_to_create = $validated['media'];
+
+            // dd($medias_to_create);
+
+            foreach ($medias_to_create as $file) {
+
                 // Salva il file in storage/public/uploads/media
                 $path = $file->store('uploads/media', 'public');
 
@@ -172,15 +187,26 @@ class ProjectController extends Controller
             }
         }
 
-        $project->update();
+        // dd($project->media);
+
+        // if ($project->image && isset($validated['image'])) {
+        //     // dd('immagine ' . $project->name);
+        //     //elimina l'immagine precedente
+        //     Storage::disk('public')->delete($project->image);
+
+        //     //aggiorna l'immagine
+        //     $project->image = Storage::disk('public')->putFile('uploads/images', $validated['image']);
+        // } else if (isset($validated['image'])) {
+        //     $project->image = Storage::disk('public')->putFile('uploads/images', $validated['image']);
+        // }
 
         if ($request->has('technologies')) {
-            $project->technologies()->sync($data['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
+            $project->technologies()->sync($validated['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
         } else {
             $project->technologies()->detach();
         }
 
-        return redirect(route('projects.show', $project));
+        return redirect(route('projects.show', $project))->with('success', 'Progetto modificato con successo');
     }
 
     /**
