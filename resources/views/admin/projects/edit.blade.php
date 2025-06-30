@@ -14,7 +14,7 @@
                     class="btn special delete md:ms-auto"
                     id="modal-trigger"
                     x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-project-deletion')"
+                    x-on:click.prevent="$dispatch('open-modal', 'delete-project-{{ $project->id }}')"
                 >Elimina</button>
             </div>
         </div>
@@ -42,32 +42,16 @@
                 </x-forms.form-field>
 
                 {{-- image --}}
-                <x-forms.form-field field="media" label="Immagine">
-                    {{-- <div class="wrap relative flex flex-wrap gap-3">
+                <x-forms.form-field
+                    field="media"
+                    label="Immagine"
+                    class="items-center"
+                >
+                    <div class="flex flex-wrap gap-3">
                         @foreach ($project->media as $media)
-                            @if ($media->type === 'image')
-                                <img src="{{ asset('storage/' . $media->url) }}" class="relative w-full h-auto object-cover">
-                            @elseif ($media->type === 'video')
-                                <video
-                                    src="{{ asset('storage/' . $media->url) }}"
-                                    controls
-                                    class="relative"
-                                ></video>
-                            @endif
-                            <x-buttons.trash
-                                name="media"
-                                itemToDelete="media"
-                                id="{{ $media->id }}"
-                                :classes="'absolute top-0 right-0'"
-                            />
-                        @endforeach
-                    </div> --}}
-
-                    <div class="wrap relative flex flex-wrap gap-3">
-                        @foreach ($project->media as $media)
-                            <div class="relative w-48 h-auto">
+                            <div class="relative w-48 h-48">
                                 @if ($media->type === 'image')
-                                    <img src="{{ asset('storage/' . $media->url) }}" class="w-full h-auto object-cover rounded">
+                                    <img src="{{ asset('storage/' . $media->url) }}" class="w-full rounded object-contain">
                                 @elseif ($media->type === 'video')
                                     <video
                                         src="{{ asset('storage/' . $media->url) }}"
@@ -77,7 +61,6 @@
                                 @endif
 
                                 {{-- Pulsante trash posizionato sopra --}}
-
                                 <x-buttons.trash
                                     name="media"
                                     :type="'media'"
@@ -86,14 +69,14 @@
                                 />
                             </div>
                         @endforeach
+                        <x-forms.inputs.file
+                            id="media"
+                            name="media[]"
+                            value="{{ old('media', $project->media) }}"
+                            multiple
+                        />
                     </div>
 
-                    <x-forms.inputs.file
-                        id="media"
-                        name="media[]"
-                        value="{{ old('media', $project->media) }}"
-                        multiple
-                    />
                     <x-forms.input-error class="mt-2 w-full" :messages="$errors->get('media')" />
                 </x-forms.form-field>
 
@@ -130,6 +113,13 @@
                 <button class="btn special ms-auto" type="submit">Modifica</button>
             </form>
         </div>
+
+        {{-- modals --}}
+        <x-delete-modal
+            :type="'project'"
+            :action="route('projects.destroy', $project)"
+            :item="$project"
+        />
 
         @foreach ($project->media as $media)
             {{-- @dd($media->id); --}}

@@ -25,16 +25,24 @@
                 @method('POST')
 
                 {{-- name --}}
-                <x-forms.form-field field="name" label="Nome piatto">
+                <x-forms.form-field field="name" label="Nome progetto">
                     <x-forms.inputs.text name="name" value="{{ old('name', '') }}" />
+                </x-forms.form-field>
+
+                {{-- media --}}
+                <x-forms.form-field field="media" label="Immagine">
+                    <x-forms.inputs.file
+                        id="media"
+                        name="media[]"
+                        multiple
+                    />
+                    <x-forms.input-error class="mt-2 w-full" :messages="$errors->get('media')" />
                 </x-forms.form-field>
 
                 {{-- description --}}
                 <x-forms.form-field field="description" label="Descrizione">
                     <x-forms.inputs.text name="description" value="{{ old('description', '') }}" />
                 </x-forms.form-field>
-
-                {{-- TODO add media managing --}}
 
                 {{-- technologies --}}
                 <x-forms.form-field field="technologies[]" label="Tecnologie utilizzate">
@@ -56,9 +64,14 @@
                         name="type_id"
                         id="type_id"
                         :first-option="'Seleziona una categoria'"
-                        :options="$categories"
+                        :options="$types"
                         :selected="old('type_id')"
                     />
+                </x-forms.form-field>
+
+                {{-- customer --}}
+                <x-forms.form-field field="customer" label="Cliente">
+                    <x-forms.inputs.text name="customer" value="{{ old('customer', '') }}" />
                 </x-forms.form-field>
 
                 <button class="btn special ms-auto" type="submit">Crea</button>

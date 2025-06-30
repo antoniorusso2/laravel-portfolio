@@ -15,25 +15,6 @@
         </div>
     </div>
 
-    @dd($project->media)
-
-    @if ($project->media->count() > 0)
-        @foreach ($project->media as $media)
-            <div class="wrap relative flex flex-wrap gap-3">
-                @foreach ($project->media as $media)
-                    @if ($media->type === 'image')
-                        <img src="{{ asset('storage/' . $media->url) }}" class="relative w-full h-auto object-cover">
-                    @elseif ($media->type === 'video')
-                        <video
-                            src="{{ asset('storage/' . $media->url) }}"
-                            controls
-                            class="relative"
-                        ></video>
-                    @endif
-                @endforeach
-            </div>
-        @endforeach
-    @endif
 
     <div class="container">
         <div class="title flex flex-wrap flex-row items-center justify-between gap-4">
@@ -47,9 +28,28 @@
             </div>
         </div>
 
-        <hr class="mt-4">
+        <hr class="my-4">
+        @if ($project->media->count() > 0)
+            <div class="wrap flex flex-wrap gap-3 my-4">
+                @foreach ($project->media as $media)
+                    @if ($media->type === 'image')
+                        <img src="{{ asset('storage/' . $media->url) }}" class="object-contain">
+                    @elseif ($media->type === 'video')
+                        <video
+                            src="{{ asset('storage/' . $media->url) }}"
+                            controls
+                            class=""
+                        ></video>
+                    @endif
+                @endforeach
+            </div>
+        @endif
 
-        <p class="text-thin mt-8">- {{ $project->description }}</p>
+        @if ($project->description)
+            <div class="description">
+                <p>{{ $project->description }}</p>
+            </div>
+        @endif
     </div>
 
     {{-- project technologies --}}

@@ -21,7 +21,7 @@
                         <x-forms.inputs.select
                             name="category_id"
                             :options="$technologies"
-                            :first-option="'Scegli categoria'"
+                            :first-option="'Scegli Tecnologia'"
                         />
                     </div>
 
@@ -31,7 +31,7 @@
                             Nome
                         </label>
 
-                        <x-forms.inputs.text name="filter" placeholder="Inserisci il nome del piatto" />
+                        <x-forms.inputs.text name="filter" placeholder="Inserisci il nome del progetto" />
                     </div>
 
 

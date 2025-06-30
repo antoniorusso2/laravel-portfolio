@@ -58,29 +58,45 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'nullable|string',
+            'technologies' => 'nullable|array',
+            'type_id' => 'nullable|exists:types,id',
+            // array di file
+            'media' => 'nullable|array',
+
+            // regole per ogni file
+            'media.*' => 'file|mimes:jpg,jpeg,png,webp,mp4,webm|max:5120',
+        ]); //array associativo
 
         // 1. Crea progetto
         $newProject = new Project();
-        $newProject->name = $data['name'];
-        $newProject->customer = $data['customer'];
-        $newProject->description = $data['description'];
-        $newProject->type_id = $data['type_id'];
-        $newProject->slug = Project::generateSlug($newProject->name);
+        $newProject->name = $validated['name'];
+        $newProject->description = $validated['description'];
+        $newProject->type_id = $validated['type_id'];
+        $newProject->slug = Project::generateSlug($validated['name']);
+
 
         // Evita duplicati
         if (Project::where('slug', $newProject->slug)->exists()) {
-            return 'Progetto omonimo già esistente';
+            return redirect(route('projects.create'))->with('error', 'Progetto omonimo già esistente');
         }
 
         $newProject->save();
 
         // 2. Aggiunge tecnologie
-        $newProject->technologies()->attach($data['technologies'] ?? []);
+        $newProject->technologies()->attach($validated['technologies'] ?? []);
 
         // 3. Salva media (immagini/video)
-        if ($request->hasFile('media')) {
-            foreach ($request->file('media') as $file) {
+        if ($validated['media']) {
+            dump('create media');
+            $medias_to_create = $validated['media'];
+
+            // dd($medias_to_create);
+
+            foreach ($medias_to_create as $file) {
+
                 // Salva il file in storage/public/uploads/media
                 $path = $file->store('uploads/media', 'public');
 
@@ -131,7 +147,7 @@ class ProjectController extends Controller
         // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|string|max:100',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'technologies' => 'nullable|array',
             'type_id' => 'nullable|exists:types,id',
             // array di file
