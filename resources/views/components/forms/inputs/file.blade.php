@@ -1,47 +1,93 @@
 @props(['item' => null, 'type' => null, 'class' => ''])
 
-<div x-data="{ fileName: '', imagePreview: null }" class="flex flex-col items-center gap-4">
-    {{-- caricamento immagine --}}
-    <label class="@error('image') border-red-500 @enderror relative flex h-48 w-48 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-300 text-gray-500 transition hover:bg-gray-100">
+<div class="flex flex-wrap gap-3 {{ $class }}" x-data="{
+    maxFiles: 5,
+    files: [],
+    previews: [],
 
-        {{-- Se l'immagine è stata caricata --}}
-        <template x-if="imagePreview">
-            <img :src="imagePreview" class="absolute inset-0 h-full w-full rounded-lg object-cover" />
-        </template>
+    handleFileChange(index, event) {
+        const file = event.target.files[0];
+        if (!file) return;
 
-        {{-- Se l'immagine non è stata caricata --}}
-        <div x-show="!imagePreview" class="pointer-events-none flex flex-col items-center">
-            <span class="text-5xl font-bold">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="size-6"
+        this.files[index] = file;
+
+        if (file.type.startsWith('image/')) {
+            this.previews[index] = { type: 'image', url: URL.createObjectURL(file) };
+        } else if (file.type.startsWith('video/')) {
+            this.previews[index] = { type: 'video', url: URL.createObjectURL(file) };
+        }
+    },
+
+    removeFile(index) {
+        this.files.splice(index, 1);
+        this.previews.splice(index, 1);
+    }
+}">
+    <template x-for="(preview, index) in Array.from({ length: maxFiles })" :key="index">
+        <div x-show="index === 0 || files[index - 1]" class="mb-6 flex flex-col items-center gap-2">
+            <!-- File preview -->
+            <div class="relative h-48 w-48 overflow-hidden rounded-lg border-2 border-dashed border-gray-300">
+                <template x-if="previews[index]">
+                    <template x-if="previews[index].type === 'image'">
+                        <img
+                            :src="previews[index].url"
+                            alt="Anteprima immagine"
+                            class="h-full w-full object-cover"
+                        />
+                    </template>
+                    <template x-if="previews[index].type === 'video'">
+                        <video
+                            :src="previews[index].url"
+                            controls
+                            class="h-full w-full object-cover"
+                        ></video>
+                    </template>
+                </template>
+
+                <template x-if="!previews[index]">
+                    <!-- SVG "aggiungi file" cliccabile -->
+                    <label :for="`file-${index}`" class="flex h-full w-full cursor-pointer flex-col items-center justify-center text-gray-400 transition hover:text-indigo-600">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-10 w-10"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 4v16m8-8H4"
+                            />
+                        </svg>
+                        <span class="text-sm">Aggiungi file</span>
+                    </label>
+                </template>
+
+                <!-- Rimuovi file -->
+                <button
+                    type="button"
+                    x-show="files[index]"
+                    @click="removeFile(index)"
+                    class="absolute top-1 right-1 rounded-full bg-red-600 p-1 text-white hover:bg-red-700"
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                    />
-                </svg>
-            </span>
-            <span class="text-sm">Scegli immagine</span>
+                    ✕
+                </button>
+            </div>
+
+            <!-- Input file nascosto -->
+            <input
+                type="file"
+                name="media[]"
+                accept="image/*,video/*"
+                class="hidden"
+                :id="`file-${index}`"
+                @change="handleFileChange(index, $event)"
+            />
+
+            <!-- Nome file -->
+            <p class="text-sm text-gray-600 truncate w-48 text-center" x-text="files[index]?.name"></p>
         </div>
-
-        <input
-            type="file"
-            {{ $attributes->merge(['class' => 'hidden', 'name' => 'image']) }}
-            @change="
-        const file = $event.target.files[0];
-        fileName = file?.name || '';
-        imagePreview = file ? URL.createObjectURL(file) : null;
-        "
-        />
-    </label>
-
-    <!-- Nome del file -->
-    <span x-text="fileName" class="max-w-xs truncate text-center text-sm text-gray-600"></span>
-
+    </template>
 </div>

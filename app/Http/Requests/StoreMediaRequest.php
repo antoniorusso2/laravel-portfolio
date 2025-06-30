@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreMediaRequest extends FormRequest
 {
@@ -11,7 +12,10 @@ class StoreMediaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        if (Auth::guest()) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -22,7 +26,8 @@ class StoreMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'url' => ['required', 'string', 'max:255'],
+            'project_id' => ['required', 'integer'],
         ];
     }
 }

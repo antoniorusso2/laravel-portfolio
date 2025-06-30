@@ -14,7 +14,7 @@
                     class="btn special delete md:ms-auto"
                     id="modal-trigger"
                     x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-project-deletion')"
+                    x-on:click.prevent="$dispatch('open-modal', 'delete-project-{{ $project->id }}')"
                 >Elimina</button>
             </div>
         </div>
@@ -42,23 +42,42 @@
                 </x-forms.form-field>
 
                 {{-- image --}}
-                <x-forms.form-field field="img" label="Immagine">
-                    @if ($project->image)
-                        <div class="img-wrap relative max-w-[300px] rounded-sm overflow-hidden py-4">
-                            <img
-                                src="{{ asset('storage/' . $project->image) }}"
-                                alt=" {{ $project->name }} anteprima immagine"
-                                class="w-full h-full object-cover object-center"
-                            >
+                <x-forms.form-field
+                    field="media"
+                    label="Immagine"
+                    class="items-center"
+                >
+                    <div class="flex flex-wrap gap-3">
+                        @foreach ($project->media as $media)
+                            <div class="relative w-48 h-48">
+                                @if ($media->type === 'image')
+                                    <img src="{{ asset('storage/' . $media->url) }}" class="w-full rounded object-contain">
+                                @elseif ($media->type === 'video')
+                                    <video
+                                        src="{{ asset('storage/' . $media->url) }}"
+                                        controls
+                                        class="w-full h-auto rounded"
+                                    ></video>
+                                @endif
 
-                            {{-- delete icon --}}
-                            <x-buttons.trash :class="'absolute top-[20px] right-[5px] '" :itemToDelete="'image'" />
-                        </div>
-                    @else
-                        <x-forms.inputs.file />
-                    @endif
+                                {{-- Pulsante trash posizionato sopra --}}
+                                <x-buttons.trash
+                                    name="media"
+                                    :type="'media'"
+                                    :id="$media->id"
+                                    :classes="'absolute top-2 right-2 z-10 hover:bg-red-500 hover:text-white transition-all p-1 rounded-full'"
+                                />
+                            </div>
+                        @endforeach
+                        <x-forms.inputs.file
+                            id="media"
+                            name="media[]"
+                            value="{{ old('media', $project->media) }}"
+                            multiple
+                        />
+                    </div>
 
-                    <x-forms.input-error class="mt-2 w-full" :messages="$errors->get('image')" />
+                    <x-forms.input-error class="mt-2 w-full" :messages="$errors->get('media')" />
                 </x-forms.form-field>
 
                 {{-- types --}}
@@ -94,6 +113,22 @@
                 <button class="btn special ms-auto" type="submit">Modifica</button>
             </form>
         </div>
+
+        {{-- modals --}}
+        <x-delete-modal
+            :type="'project'"
+            :action="route('projects.destroy', $project)"
+            :item="$project"
+        />
+
+        @foreach ($project->media as $media)
+            {{-- @dd($media->id); --}}
+            <x-delete-modal
+                :type="'media'"
+                :action="route('media.destroy', $media->id)"
+                :item="$media"
+            />
+        @endforeach
     </section>
 
 

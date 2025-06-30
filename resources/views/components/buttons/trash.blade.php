@@ -1,10 +1,10 @@
-@props(['name' => null, 'itemToDelete' => null, 'class' => null])
+@props(['type' => null, 'id' => null, 'classes' => ''])
 
 <button
-    class="bg-red-500 hover:bg-red-700  transition ease-in-out duration-150 rounded-sm p-1 {{ $class }}"
+    class="bg-red-500 hover:bg-red-700  transition ease-in-out duration-150 rounded-sm p-1 {{ $classes }}"
     type="button"
     x-data=""
-    x-on:click.prevent="$dispatch('open-modal', 'confirm-{{ $itemToDelete }}-deletion')"
+    x-on:click.prevent="$dispatch('open-modal', 'delete-{{ $type }}-{{ $id }}')"
 >
     <svg
         xmlns="http://www.w3.org/2000/svg"

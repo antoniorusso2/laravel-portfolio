@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+            {{ __('Assicurati di usare una password lunga e complessa in modo da tenere i tuoi dati al sicuro.') }}
         </p>
     </header>
 
@@ -18,43 +18,43 @@
         @method('put')
 
         <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input
+            <x-forms.input-label for="update_password_current_password" :value="__('Password Attuale')" />
+            <x-forms.inputs.text
                 id="update_password_current_password"
                 name="current_password"
                 type="password"
                 class="mt-1 block w-full"
                 autocomplete="current-password"
             />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+            <x-forms.input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input
+            <x-forms.input-label for="update_password_password" :value="__('Nuova Password')" />
+            <x-forms.inputs.text
                 id="update_password_password"
                 name="password"
                 type="password"
                 class="mt-1 block w-full"
                 autocomplete="new-password"
             />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            <x-forms.input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input
+            <x-forms.input-label for="update_password_password_confirmation" :value="__('Conferma Nuova Password')" />
+            <x-forms.inputs.text
                 id="update_password_password_confirmation"
                 name="password_confirmation"
                 type="password"
                 class="mt-1 block w-full"
                 autocomplete="new-password"
             />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+            <x-forms.input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-buttons.primary>{{ __('Salva') }}</x-buttons.primary>
 
             @if (session('status') === 'password-updated')
                 <p
@@ -63,7 +63,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('La password è stata modificata con successo') }}</p>
             @endif
         </div>
     </form>

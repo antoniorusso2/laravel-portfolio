@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TechnologyController extends Controller
 {
@@ -85,8 +86,7 @@ class TechnologyController extends Controller
     public function destroy(Technology $technology)
     {
         // eliminazione del valore nella colonna technology id dalla tabella pivot
-
-        dd("delete", $technology);
+        DB::table('project_technology')->where('technology_id', $technology->id)->delete();
 
         $technology->delete();
 

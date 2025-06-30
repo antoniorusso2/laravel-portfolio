@@ -10,47 +10,60 @@
                 class="btn special delete md:ms-auto"
                 id="modal-trigger"
                 x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirm-project-deletion')"
+                x-on:click.prevent="$dispatch('open-modal', 'delete-project-{{ $project->id }}')"
             >Elimina</button>
         </div>
     </div>
 
-    @if ($project->image)
-        <div class="img__wrap container">
-            <img
-                class="max-w-xs"
-                src="{{ asset('storage/' . $project->image) }}"
-                alt=" {{ $project->name }} anteprima immagine"
-            >
-            {{-- @dd(asset('storage/' . $project->image)) --}}
-        </div>
-    @endif
 
     <div class="container">
-        <div class="title_price flex flex-wrap flex-row items-center justify-between gap-4">
+        <div class="title flex flex-wrap flex-row items-center justify-between gap-4">
             <div class="name">
                 <h1 class="text-4xl mb-2">{{ $project->name }}</h1>
                 @if ($project->type)
-                    <span class="badge rounded-sm px-3 py-1" style="background-color: {{ $project->type->color }}">{{ $project->type->name }}</span>
+                    <span class="badge rounded-sm py-1">{{ $project->type->name }}</span>
                 @else
                     <span class="badge rounded-sm py-1 text-gray-500 italic">Nessuna categoria selezionata</span>
                 @endif
             </div>
         </div>
 
-        <hr class="mt-4">
+        <hr class="my-4">
+        @if ($project->media->count() > 0)
+            <div class="wrap flex flex-wrap gap-3 my-4">
+                @foreach ($project->media as $media)
+                    @if ($media->type === 'image')
+                        <img src="{{ asset('storage/' . $media->url) }}" class="object-contain">
+                    @elseif ($media->type === 'video')
+                        <video
+                            src="{{ asset('storage/' . $media->url) }}"
+                            controls
+                            class=""
+                        ></video>
+                    @endif
+                @endforeach
+            </div>
+        @endif
 
-        <p class="text-thin mt-8">- {{ $project->description }}</p>
+        @if ($project->description)
+            <div class="description">
+                <p>{{ $project->description }}</p>
+            </div>
+        @endif
     </div>
 
     {{-- project technologies --}}
     @if ($project->technologies->count() > 0)
         <div class="container">
             <h2 class="mb-4 text-3xl">Tech Stack:</h2>
-            <ul class="flex flex-col flex-wrap gap-4">
-                @foreach ($project->technologies as $ingredient)
+            <ul class="grid gap-3 grid-cols-2 sm:grid-cols-4 md:grid-cols-6">
+                @foreach ($project->technologies as $technology)
                     <li class="badge my-2">
-                        - {{ $ingredient->name }}
+                        <span><img
+                                class="w-20 object-cover object-center"
+                                src="{{ $technology->icon_url }}"
+                                alt="{{ $technology->name }}"
+                            ></span>
                     </li>
                 @endforeach
             </ul>
