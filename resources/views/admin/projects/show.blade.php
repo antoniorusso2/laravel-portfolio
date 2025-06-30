@@ -56,7 +56,7 @@
     @if ($project->technologies->count() > 0)
         <div class="container">
             <h2 class="mb-4 text-3xl">Tech Stack:</h2>
-            <ul class="grid gap-3 grid-cols-2 sm:grid-cols-4 md:grid-cols-6">
+            <ul class="grid gap-3 grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10">
                 @foreach ($project->technologies as $technology)
                     <li class="badge my-2">
                         <span><img

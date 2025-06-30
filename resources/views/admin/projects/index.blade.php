@@ -6,7 +6,7 @@
     </x-slot>
     <div class="container">
         <div class="flex flex-col sm:flex-row justify-between items-start">
-            <a class="btn special" href="{{ route('projects.create') }}">Crea nuovo Piatto</a>
+            <a class="btn special" href="{{ route('projects.create') }}">Crea nuovo Progetto</a>
             {{-- <x-items-per-page
                 action="{{ route('projects.index') }}"
                 :limits="[4, 8, 12]"

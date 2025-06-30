@@ -12,7 +12,7 @@
         <div class="w-full ">
             <form method="GET" action="{{ route('projects.index') }}">
 
-                <div class="filter flex flex-col  md:flex-row md:items-end md:space-x-2">
+                <div class="filter flex flex-col md:flex-row md:items-end md:space-x-2">
                     {{-- categoria --}}
                     <div class="filter-field">
                         <label for="category_id">
