@@ -150,6 +150,7 @@ class ProjectController extends Controller
             'description' => 'nullable|string',
             'technologies' => 'nullable|array',
             'type_id' => 'nullable|exists:types,id',
+
             // array di file
             'media' => 'nullable|array',
 
@@ -179,7 +180,7 @@ class ProjectController extends Controller
 
         // dd($validated['media']);
         // 3. Salva media (immagini/video)
-        if ($validated['media']) {
+        if (isset($validated['media'])) {
             dump('create media');
             $medias_to_create = $validated['media'];
 
