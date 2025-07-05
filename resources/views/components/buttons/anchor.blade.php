@@ -1,5 +1,3 @@
-@props(['class' => '', 'href' => '#'])
-
-<a href="{{ $href }}" class="btn special border-gray-500 cursor-pointer {{ $class }}">
+<a {{ $attributes->merge(['class' => 'btn special border-gray-500 cursor-pointer', 'href' => '']) }}>
     {{ $text ?? $slot }}
 </a>
