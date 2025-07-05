@@ -122,7 +122,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-
         $project->load('media');
 
         return view('admin.projects.show', compact('project'));

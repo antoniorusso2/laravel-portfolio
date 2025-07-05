@@ -9,7 +9,7 @@
                 class="btn special delete ms-auto"
                 id="modal-trigger"
                 x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirm-technology-deletion')"
+                x-on:click.prevent="$dispatch('open-modal', 'delete-technology-{{ $technology->id }}')"
             >Elimina</button>
         </div>
     </div>

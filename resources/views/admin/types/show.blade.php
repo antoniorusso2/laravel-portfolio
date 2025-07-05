@@ -9,7 +9,7 @@
                 class="btn special delete md:ms-auto"
                 id="modal-trigger"
                 x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirm-type-deletion')"
+                x-on:click.prevent="$dispatch('open-modal', 'delete-type-{{ $type->id }}')"
             >Elimina</button>
         </div>
     </div>
