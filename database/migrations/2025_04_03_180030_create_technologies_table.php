@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name', 50);
 
             $table->string('color', 10)->nullable();
-            $table->string('external_url', 255)->nullable();
-            $table->string('path')->nullable();
+            $table->string('icon_external_url', 255)->nullable();
+            $table->string('icon_path')->nullable();
 
             $table->timestamps();
         });

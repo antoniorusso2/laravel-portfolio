@@ -35,7 +35,7 @@ class TechnologyController extends Controller
     {
         // dd($request->all());
         $data = $request->all();
-
+        dd($data);
         $newTechnology = new Technology();
 
         $newTechnology->name = $data['name'];
