@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 body {
+    @apply bg-[linear-gradient ]
     @apply dark:bg-gray-700 dark:text-gray-200 min-h-dvh flex flex-col;
+
 }
 
 select {
@@ -27,8 +29,12 @@ select {
 }
 
 .btn.special:hover {
-    @apply border-indigo-400 text-gray-700  rounded-tr-xl rounded-bl-xl bg-gray-400;
+    @apply border-indigo-400 text-gray-300  rounded-tr-xl rounded-bl-xl ;
     @apply transition-all duration-200 ease-in-out;
+}
+
+.btn.special:focus {
+    @apply border-indigo-950 bg-slate-900 text-white;
 }
 
 .btn.special.delete {

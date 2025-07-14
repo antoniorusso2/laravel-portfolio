@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TechnologyController extends Controller
 {
@@ -36,6 +37,15 @@ class TechnologyController extends Controller
         // dd($request->all());
         $data = $request->all();
         dd($data);
+
+        //aggiunta link esterno o file nello storage locale del server
+        if (isset($data['icon'])) {
+            Storage::putFile($data['icon']);
+            $newTechnology->icon = $data['icon'];
+            exit;
+        } else if ($data['icon_external_url']) {
+            
+        }
         $newTechnology = new Technology();
 
         $newTechnology->name = $data['name'];

@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Project as Project;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProjectsSeeder extends Seeder
 {
@@ -27,7 +27,6 @@ class ProjectsSeeder extends Seeder
             $newProject->type_id = rand(1, 5);
 
             // ? aggiunta delle tecnologie al seeder in maniera casuale
-            // 
 
             $slug = Str::of("ntn rss {$newProject->name}")->slug('-');
 
