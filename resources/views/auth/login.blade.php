@@ -7,8 +7,8 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input
+            <x-forms.input-label for="email" :value="__('Email')" />
+            <x-forms.inputs.text
                 id="email"
                 class="block mt-1 w-full"
                 type="email"
@@ -18,14 +18,14 @@
                 autofocus
                 autocomplete="username"
             />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-forms.input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-forms.input-label for="password" :value="__('Password')" />
 
-            <x-text-input
+            <x-forms.inputs.text
                 id="password"
                 class="block mt-1 w-full"
                 type="password"
@@ -34,7 +34,7 @@
                 autocomplete="current-password"
             />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-forms.input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Remember Me -->
@@ -57,9 +57,9 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-buttons.primary class="ms-3">
                 {{ __('Log in') }}
-            </x-primary-button>
+            </x-buttons.primary>
         </div>
     </form>
 </x-guest-layout>
