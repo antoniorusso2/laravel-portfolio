@@ -5,10 +5,9 @@
             {{ __('Tipologie progetti') }}
         </h2>
     </x-slot>
+
     <div class="container">
-
         <a class="btn special" href="{{ route('types.create') }}">Aggiungi una nuova tipologia</a>
-
     </div>
 
     <div class="container">

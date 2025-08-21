@@ -5,13 +5,7 @@
         </h2>
     </x-slot>
 
-    <section class="cta">
-        <div class="container">
-            <div class="flex justify-between">
-                <a class="btn special" href="{{ route('projects.index') }}">Indietro</a>
-            </div>
-        </div>
-    </section>
+    <x-sub-header-cta page="create" goBack="projects.index" />
 
     <section class="create_form">
         <div class="container">

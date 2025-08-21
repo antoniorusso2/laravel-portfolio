@@ -1,18 +1,9 @@
 <x-app-layout>
-    <div class="container">
-        <div class="flex gap-4 w-full justify-start flex-wrap">
-            <a class="btn special" href="{{ route('technologies.index') }}">Indietro</a>
-            <a class="btn special" href="{{ route('technologies.edit', $technology) }}">Modifica</a>
-
-            {{-- delete --}}
-            <button
-                class="btn special delete ms-auto"
-                id="modal-trigger"
-                x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'delete-technology-{{ $technology->id }}')"
-            >Elimina</button>
-        </div>
-    </div>
+    <x-sub-header-cta
+        :page="'show'"
+        :item="$technology"
+        :hasDelete="true"
+    />
 
     <div class="container">
         <div class="">

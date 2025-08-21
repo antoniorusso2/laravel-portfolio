@@ -1,18 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Crea nuovo progetto') }}
+            {{ __('Aggiungi una nuova tecnologia') }}
         </h2>
     </x-slot>
 
-    <div class="container">
-
-        <div class="col">
-            <x-buttons.anchor href="{{ route('technologies.index') }}">
-                Indietro
-            </x-buttons.anchor>
-        </div>
-    </div>
+    <x-sub-header-cta page="create" goBack="technologies.index" />
     <div class="container">
         <form
             class="mx-auto flex w-full flex-col items-start justify-center gap-4"

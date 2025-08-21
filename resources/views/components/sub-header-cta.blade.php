@@ -1,9 +1,10 @@
-@props(['page' => 'index', 'route' => '', 'item', 'hasDelete' => false])
+@props(['page' => 'index', 'route' => '', 'goBack' => 'dashboard', 'item' => null, 'hasDelete' => false])
 
 <?php
 if ($hasDelete) {
     $modal_identifier = match ($item::class) {
         'App\Models\Project' => 'delete-project-',
+        'App\Models\Technology' => 'delete-technology-',
         'App\Models\Media' => 'delete-media-',
     };
     $modal_identifier .= (string) $item->id;
@@ -37,6 +38,11 @@ if ($hasDelete) {
                     <x-buttons.anchor href="{{ $item->getRoute('index') }}">
                         Indietro
                     </x-buttons.anchor>
+
+                    {{-- edit --}}
+                    <x-buttons.anchor class="ms-3" href="{{ $item->getRoute('edit') }}">
+                        Modifica
+                    </x-buttons.anchor>
                     {{-- delete --}}
                     <button
                         class="btn special delete md:ms-auto"
@@ -46,12 +52,20 @@ if ($hasDelete) {
                     >Elimina</button>
                 @break
 
+                @case('create')
+                    <x-buttons.anchor :href="route($goBack)">
+                        Indietro
+                    </x-buttons.anchor>
+                @break
+
                 @default
                     <div>
                         no sub-header content
                     </div>
                 @break
             @endswitch
+
+
         </div>
     </div>
 </section>

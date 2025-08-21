@@ -7,9 +7,6 @@
             :hasDelete="true"
         />
 
-
-
-
         <div class="container">
             <div class="title flex flex-wrap flex-row items-center justify-between gap-4">
                 <div class="name">
