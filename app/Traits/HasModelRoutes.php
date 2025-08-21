@@ -2,17 +2,28 @@
 
 namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+/**
+ * @param route string -> index, show, edit
+ */
 trait HasModelRoutes
 {
-    public function getShowRoute(Model $model)
+    public function getRoute(string $route): string
     {
-        $name = class_basename($model);
+        $allowed = [
+            'index',
+            'show',
+            'edit'
+        ];
 
-        $routeName = strtolower(Str::plural($name)) . '.show';
+        if (!in_array($route, $allowed)) {
+            return "route not allowed";
+        }
 
-        return route($routeName, $model);
+        $name = class_basename($this);
+        $complete_route = strtolower(Str::plural($name)) . ".$route";
+
+        return route($complete_route, $this);
     }
 }

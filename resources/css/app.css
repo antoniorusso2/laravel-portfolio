@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-[linear-gradient ]
-    @apply dark:bg-gray-700 dark:text-gray-200 min-h-dvh flex flex-col;
-
+    @apply dark:bg-gray-800 dark:text-gray-200 min-h-dvh flex flex-col;
 }
 
 select {
@@ -13,11 +11,7 @@ select {
 }
 
 .container {
-    @apply max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8;
-}
-
-.row {
-    @apply flex flex-wrap -mx-4 py-4 w-full;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
 }
 
 .btn {
@@ -29,7 +23,7 @@ select {
 }
 
 .btn.special:hover {
-    @apply border-indigo-400 text-gray-300  rounded-tr-xl rounded-bl-xl ;
+    @apply border-indigo-400 text-gray-300  rounded-tr-xl rounded-bl-xl;
     @apply transition-all duration-200 ease-in-out;
 }
 
