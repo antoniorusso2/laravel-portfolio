@@ -57,10 +57,6 @@
                 </a>
             @endif
 
-            <x-buttons.secondary class="ms-3">
-                <a href="{{ route('register') }}">Registrati</a>
-            </x-buttons.secondary>
-
             <x-buttons.primary class="ms-3">
                 {{ __('Log in') }}
             </x-buttons.primary>
