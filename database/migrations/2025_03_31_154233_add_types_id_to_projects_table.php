@@ -16,10 +16,6 @@ return new class extends Migration
             //rimozione colonna category
             $table->dropColumn('category');
 
-            //aggiunta nuova colonna con foreign key in maniera estesa
-            // $table->unsignedBigInteger('type_id');
-            // $table->foreign('type_id')->references('id')->on('types');
-
             //aggiunta nuova colonna con foreign key
             $table->foreignId('type_id')->nullable()->constrained()->onDelete('set null');
         });

@@ -63,7 +63,7 @@ class TypeController extends Controller
 
     public function destroy(Type $type)
     {
-        dd("delete", $type);
+        // dd("delete", $type);
 
         // eliminazione del valore nella colonna type_id dei progetti collegati alla tipologia
         Project::where('type_id', $type->id)->update(['type_id' => null]);

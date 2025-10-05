@@ -21,7 +21,7 @@ return [
 
     'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => [env('FRONTEND_URL', 'APP_URL')],
+    'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 

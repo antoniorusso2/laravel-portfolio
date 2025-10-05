@@ -1,6 +1,7 @@
 @props(['type' => null, 'id' => null, 'classes' => ''])
 
 <button
+    {{ $attributes->merge() }}
     class="bg-red-500 hover:bg-red-700  transition ease-in-out duration-150 rounded-sm p-1 {{ $classes }}"
     type="button"
     x-data=""

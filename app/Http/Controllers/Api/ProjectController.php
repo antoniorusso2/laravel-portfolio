@@ -12,8 +12,6 @@ class ProjectController extends Controller
     {
         $limit = $request->limit ?? 4;
 
-
-
         $query = Project::query();
 
         if ($request->has('name')) {

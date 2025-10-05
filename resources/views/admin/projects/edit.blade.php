@@ -5,20 +5,11 @@
         </h2>
     </x-slot>
 
-    <section class="cta">
-        <div class="container">
-            <div class="flex justify-between">
-                <a class="btn special" href="{{ route('projects.index') }}">Indietro</a>
-                {{-- delete --}}
-                <button
-                    class="btn special delete md:ms-auto"
-                    id="modal-trigger"
-                    x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'delete-project-{{ $project->id }}')"
-                >Elimina</button>
-            </div>
-        </div>
-    </section>
+    <x-sub-header-cta
+        :page="'edit'"
+        :item="$project"
+        :hasDelete="true"
+    />
 
     <section class="modify_form">
         <div class="container">

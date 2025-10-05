@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateMediaRequest extends FormRequest
 {
@@ -11,7 +12,10 @@ class UpdateMediaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        if (Auth::guest()) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -21,8 +25,6 @@ class UpdateMediaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

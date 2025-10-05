@@ -77,7 +77,6 @@ class ProjectController extends Controller
         $newProject->type_id = $validated['type_id'];
         $newProject->slug = Project::generateSlug($validated['name']);
 
-
         // Evita duplicati
         if (Project::where('slug', $newProject->slug)->exists()) {
             return redirect(route('projects.create'))->with('error', 'Progetto omonimo già esistente');
@@ -122,7 +121,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-
         $project->load('media');
 
         return view('admin.projects.show', compact('project'));

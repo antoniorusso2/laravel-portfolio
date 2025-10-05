@@ -1,23 +1,33 @@
 <x-app-layout>
-    <div class="container">
-        <div class="flex gap-4 w-full justify-start flex-wrap">
-            <a class="btn special" href="{{ route('technologies.index') }}">Indietro</a>
-            <a class="btn special" href="{{ route('technologies.edit', $technology) }}">Modifica</a>
+    <x-sub-header-cta
+        :page="'show'"
+        :item="$technology"
+        :hasDelete="true"
+    />
 
-            {{-- delete --}}
-            <button
-                class="btn special delete ms-auto"
-                id="modal-trigger"
-                x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirm-technology-deletion')"
-            >Elimina</button>
+    <div class="container">
+        <div class="">
+            <h1 class="text-4xl inline-block me-5">{{ $technology->name }}</h1>
+
+            @if ($technology->icon_path != null && !empty($technology->icon_path))
+                <img
+                    class="inline-block"
+                    src="{{ assets('storage/' . $technology->icon_path) }}"
+                    alt="{{ $technology->name }}"
+                >
+            @else
+                <img
+                    class="inline-block"
+                    src="{{ $technology->icon_external_url }}"
+                    alt=""
+                >
+            @endif
         </div>
-    </div>
+        {{-- icon --}}
 
-    <div class="container">
-        <h1 class="text-4xl">{{ $technology->name }}</h1>
-        <div class="badge my-4 text-xl flex gap-4">
-            Colore: <span class="block badge p-3 w-16" style="background-color: {{ $technology->color }}"></span>
+        <div class="badge my-4 text-xl gap-4">
+            <span class="block mb-5">Colore:</span>
+            <span class="block badge p-3 w-16 h-16 rounded-full" style="background-color: {{ $technology->color }}"></span>
         </div>
     </div>
 

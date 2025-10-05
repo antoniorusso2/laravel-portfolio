@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class FilterProjectRequest extends FormRequest
 {
@@ -11,6 +12,9 @@ class FilterProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if (Auth::guest()) {
+            return false;
+        }
 
         return true;
     }
