@@ -18,7 +18,7 @@ class ProjectController extends Controller
             $query->where('name', 'like', '%' . $request->name . '%');
         }
 
-        $projects = $query->paginate(4);
+        $projects = $query->paginate($limit);
 
         $projects->load('type', 'technologies', 'media');
 

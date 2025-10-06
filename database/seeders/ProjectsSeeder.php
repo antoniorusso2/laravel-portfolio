@@ -26,13 +26,13 @@ class ProjectsSeeder extends Seeder
             $newProject->image = null;
             $newProject->type_id = rand(1, 5);
 
-            // ? aggiunta delle tecnologie al seeder in maniera casuale
-
+            $technologies = [rand(1, 5), rand(1, 5), rand(1, 5)];
             $slug = Str::of("ntn rss {$newProject->name}")->slug('-');
 
             $newProject->slug = $slug;
 
             $newProject->save();
+            $newProject->technologies()->sync($technologies);
         }
     }
 }
