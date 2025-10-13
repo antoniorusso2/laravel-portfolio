@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name', 50);
+            $table->tinyInteger('level')->default(1);
 
             $table->string('color', 10)->nullable();
             $table->string('icon', 255)->nullable();
