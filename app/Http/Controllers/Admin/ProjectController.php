@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FilterProjectRequest;
+use App\Http\Requests\Projects\FilterProjectRequest;
+use App\Http\Requests\Projects\StoreProjectRequest;
 use App\Models\Media;
 use App\Models\Project;
 use App\Models\Technology;
@@ -20,18 +21,15 @@ class ProjectController extends Controller
     {
         $limit = $request->limit ?? 4;
 
-        $filters = $request->validate([
-            'filter' => 'nullable|string|max:50',
-            'type_id' => 'nullable'
-        ]);
+        $validated = $request->all();
 
         $query = Project::query();
 
-        if (!empty($filters['type_id'])) {
+        if (!empty($validated['type_id'])) {
             $query->where('type_id', $request->type_id);
         }
 
-        if (!empty($filters['filter'])) {
+        if (!empty($validated['filter'])) {
             $query->where('name', 'like', '%' . $request->filter . '%');
         }
 
@@ -48,27 +46,15 @@ class ProjectController extends Controller
         $types = Type::all();
         $technologies = Technology::all();
 
-        // dd($types);
-        //restituisce semplicemente una view dove poi si troverà il form
         return view('admin.projects.create', compact("types", "technologies"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'description' => 'nullable|string',
-            'technologies' => 'nullable|array',
-            'type_id' => 'nullable|exists:types,id',
-            // array di file
-            'media' => 'nullable|array',
-
-            // regole per ogni file
-            'media.*' => 'file|mimes:jpg,jpeg,png,webp,mp4,webm|max:5120',
-        ]); //array associativo
+        $validated = $request->all();
 
         // 1. Crea progetto
         $newProject = new Project();
@@ -142,24 +128,9 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        // dd($request->all());
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'description' => 'nullable|string',
-            'technologies' => 'nullable|array',
-            'type_id' => 'nullable|exists:types,id',
-
-            // array di file
-            'media' => 'nullable|array',
-
-            // regole per ogni file
-            'media.*' => 'file|mimes:jpg,jpeg,png,webp,mp4,webm|max:5120',
-        ]); //array associativo
-
+        $validated = $request->all();
 
         $newSlug = Project::generateSlug($project['name']);
-
-        // dd($project->slug, $newSlug);
 
         //controllo slug diverso da quello precedente
         if ($newSlug != $project->slug) {
@@ -173,13 +144,10 @@ class ProjectController extends Controller
             }
         }
 
-        // dd($validated);
         $project->update($validated);
 
-        // dd($validated['media']);
-        // 3. Salva media (immagini/video)
+        // Add media
         if (isset($validated['media'])) {
-            dump('create media');
             $medias_to_create = $validated['media'];
 
             // dd($medias_to_create);
@@ -202,21 +170,8 @@ class ProjectController extends Controller
             }
         }
 
-        // dd($project->media);
-
-        // if ($project->image && isset($validated['image'])) {
-        //     // dd('immagine ' . $project->name);
-        //     //elimina l'immagine precedente
-        //     Storage::disk('public')->delete($project->image);
-
-        //     //aggiorna l'immagine
-        //     $project->image = Storage::disk('public')->putFile('uploads/images', $validated['image']);
-        // } else if (isset($validated['image'])) {
-        //     $project->image = Storage::disk('public')->putFile('uploads/images', $validated['image']);
-        // }
-
         if ($request->has('technologies')) {
-            $project->technologies()->sync($validated['technologies']); //con il metodo sync si aggiorna automaticamente la tabella pivot in base ai valori passati
+            $project->technologies()->sync($validated['technologies']);
         } else {
             $project->technologies()->detach();
         }
@@ -230,13 +185,12 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         // se l'immagine esiste ed è diversa da null in questo punto allora controllo se esiste in local storage e la elimino anche dallo storage locale
-        dd("delete", $project);
         if ($project->image && Storage::exists($project->image)) {
             Storage::delete($project->image);
-            // dd('immagine presente in local storage');
         }
 
         $project->delete();
+
         return redirect(route('projects.index'));
     }
 }
