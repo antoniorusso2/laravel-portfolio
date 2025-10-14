@@ -6,9 +6,9 @@
         </h2>
     </x-slot>
 
-    <div class="container">
-        <a class="btn special" href="{{ route('types.create') }}">Aggiungi una nuova tipologia</a>
-    </div>
+    <x-sub-header-cta page="index" route="{{ route('types.create') }}">
+        Aggiungi una nuova tipologia
+    </x-sub-header-cta>
 
     <div class="container">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 gap-4">

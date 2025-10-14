@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Projects;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class FilterProjectRequest extends FormRequest
+class StoreProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,17 @@ class FilterProjectRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string>
      */
     public function rules(): array
     {
         return [
-            'filter' => 'nullable|string|max:50',
-            'type_id' => 'nullable'
+            'name' => 'required|string|max:100',
+            'description' => 'nullable|string',
+            'technologies' => 'nullable|array',
+            'type_id' => 'nullable|exists:types,id',
+            'media' => 'nullable|array',
+            'media.*' => 'file|mimes:jpg,jpeg,png,webp,mp4,webm|max:5120',
         ];
     }
 }

@@ -5,21 +5,11 @@
         </h2>
     </x-slot>
 
-    <section class="cta">
-        <div class="container">
-            <div class="flex justify-between">
-                <a class="btn special" href="{{ route('technologies.index') }}">Indietro</a>
-
-                {{-- delete --}}
-                <button
-                    class="btn special delete md:ms-auto"
-                    id="modal-trigger"
-                    x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'delete-technology-{{ $technology->id }}')"
-                >Elimina</button>
-            </div>
-        </div>
-    </section>
+    <x-sub-header-cta
+        :page="'edit'"
+        :item="$technology"
+        :hasDelete="true"
+    />
 
     <section class="modify_form">
         <div class="container">
@@ -38,19 +28,39 @@
                 </x-forms.form-field>
 
                 {{-- icon --}}
-                {{-- old icon --}}
 
                 <x-forms.form-field field="icon" label="Icona">
-                    <x-forms.inputs.text name="icon" value="{{ old('icon', $technology->icon_url) }}" />
-                    @if ($technology->icon_url)
+                    <x-forms.inputs.text name="icon" value="{{ old('icon', $technology->icon) }}" />
+                    @if ($technology->icon)
                         <div class="img-wrap relative max-w-[300px] rounded-sm overflow-hidden py-4">
                             <img
-                                src="{{ $technology->icon_url }}"
+                                src="{{ $technology->icon }}"
+                                alt=" {{ $technology->name }} anteprima immagine"
+                                class="w-full h-full object-cover object-center"
+                            >
+                        </div>
+                    @elseif ($technology->icon_external_url)
+                        {{-- TODO: add trash can delete icon  --}}
+                        <div class="">
+                            <img
+                                src="{{ $technology->icon_external_url }}"
                                 alt=" {{ $technology->name }} anteprima immagine"
                                 class="w-full h-full object-cover object-center"
                             >
                         </div>
                     @endif
+                </x-forms.form-field>
+
+                {{-- skill level --}}
+
+                <x-forms.form-field field="level" label="Livello di competenza">
+                    <x-forms.inputs.range
+                        name="level"
+                        id="level"
+                        value="{{ old('level', $technology->level) }}"
+                        min="1"
+                        max="5"
+                    />
                 </x-forms.form-field>
 
                 {{-- color --}}

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Technologies\StoreTechnologyRequest;
+use App\Http\Requests\Technologies\UpdateTechnologyRequest;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
@@ -32,24 +34,23 @@ class TechnologyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTechnologyRequest $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $data = $request->all();
-        dd($data);
+        $newTechnology = new Technology();
 
         //aggiunta link esterno o file nello storage locale del server
         if (isset($data['icon'])) {
             Storage::putFile($data['icon']);
             $newTechnology->icon = $data['icon'];
-            exit;
-        } else if ($data['icon_external_url']) {
-            
+        } else {
+            $newTechnology->icon_url = $data['icon_external_url'];
         }
-        $newTechnology = new Technology();
 
         $newTechnology->name = $data['name'];
         $newTechnology->color = $data['color'];
+        $newTechnology->level = $data['level'];
 
         $newTechnology->save();
 
@@ -75,15 +76,21 @@ class TechnologyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Technology $technology)
+    public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
-        // dd($request->all());
+        $validated = $request->all();
 
-        $data = $request->all();
+        //aggiunta link esterno o file nello storage locale del server
+        if (isset($validated['icon'])) {
+            Storage::putFile($validated['icon']);
+            $technology->icon = $validated['icon'];
+        } else if (isset($validated['icon_external_url'])) {
+            $technology->icon_url = $validated['icon_external_url'];
+        }
 
-        $technology->name = $data['name'];
-        $technology->color = $data['color'];
-        $technology->icon_url = $data['icon'];
+        $technology->name = $validated['name'];
+        $technology->color = $validated['color'];
+        $technology->level = $validated['level'];
 
         $technology->save();
 

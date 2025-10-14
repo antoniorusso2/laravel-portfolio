@@ -17,7 +17,7 @@
                 <x-forms.inputs.text name="name" value="{{ old('name', '') }}" />
             </x-forms.form-field>
 
-            <x-forms.form-field field="icon_url" label="Link esterno ad un'icona">
+            <x-forms.form-field field="icon_external_url" label="Link esterno ad un'icona">
                 <x-forms.inputs.text />
             </x-forms.form-field>
             <x-forms.form-field field="icon" label="Carica un'icona personalizzata">
@@ -25,7 +25,7 @@
             </x-forms.form-field>
 
             <x-forms.form-field field="color" label="Colore">
-                <x-forms.inputs.color />
+                <x-forms.inputs.color value="" />
             </x-forms.form-field>
 
             <button type="submit" class="btn btn-primary">Crea</button>
