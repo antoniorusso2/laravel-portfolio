@@ -29,26 +29,8 @@
 
                 {{-- icon --}}
 
-                <x-forms.form-field field="icon" label="Icona">
-                    <x-forms.inputs.text name="icon" value="{{ old('icon', $technology->icon) }}" />
-                    @if ($technology->icon)
-                        <div class="img-wrap relative max-w-[300px] rounded-sm overflow-hidden py-4">
-                            <img
-                                src="{{ $technology->icon }}"
-                                alt=" {{ $technology->name }} anteprima immagine"
-                                class="w-full h-full object-cover object-center"
-                            >
-                        </div>
-                    @elseif ($technology->icon_external_url)
-                        {{-- TODO: add trash can delete icon  --}}
-                        <div class="">
-                            <img
-                                src="{{ $technology->icon_external_url }}"
-                                alt=" {{ $technology->name }} anteprima immagine"
-                                class="w-full h-full object-cover object-center"
-                            >
-                        </div>
-                    @endif
+                <x-forms.form-field field="icon_external_url" label="Icona">
+                    <x-forms.inputs.text name="icon_external_url" value="{{ old('icon', $technology->icon_external_url) }}" />
                 </x-forms.form-field>
 
                 {{-- skill level --}}

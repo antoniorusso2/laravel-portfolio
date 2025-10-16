@@ -15,9 +15,7 @@ class StoreTechnologyRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Auth::guest()) {
-            return false;
-        }
+
         return true;
     }
 

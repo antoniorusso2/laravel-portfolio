@@ -17,15 +17,27 @@
                 <x-forms.inputs.text name="name" value="{{ old('name', '') }}" />
             </x-forms.form-field>
 
-            <x-forms.form-field field="icon_external_url" label="Link esterno ad un'icona">
-                <x-forms.inputs.text />
-            </x-forms.form-field>
-            <x-forms.form-field field="icon" label="Carica un'icona personalizzata">
-                <x-forms.inputs.file />
+            <x-forms.form-field
+                field="icon_external_url"
+                label="Link esterno ad un'icona"
+                value="{{ old('icon_external_url', '') }}"
+            >
+                <x-forms.inputs.text id="icon_external_url" name="icon_external_url" />
             </x-forms.form-field>
 
             <x-forms.form-field field="color" label="Colore">
-                <x-forms.inputs.color value="" />
+                <x-forms.inputs.color />
+            </x-forms.form-field>
+
+            {{-- level --}}
+            <x-forms.form-field field="level" label="Livello di competenza">
+                <x-forms.inputs.range
+                    name="level"
+                    id="level"
+                    value="{{ old('level', 1) }}"
+                    min="1"
+                    max="5"
+                />
             </x-forms.form-field>
 
             <button type="submit" class="btn btn-primary">Crea</button>

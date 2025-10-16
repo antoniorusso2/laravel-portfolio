@@ -36,21 +36,20 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
-        dd($request->all());
-        $data = $request->all();
+        $validated = $request->all();
         $newTechnology = new Technology();
 
         //aggiunta link esterno o file nello storage locale del server
-        if (isset($data['icon'])) {
-            Storage::putFile($data['icon']);
-            $newTechnology->icon = $data['icon'];
+        if (isset($validated['icon'])) {
+            Storage::putFile($validated['icon']);
+            $newTechnology->icon = $validated['icon'];
         } else {
-            $newTechnology->icon_url = $data['icon_external_url'];
+            $newTechnology->icon_external_url = $validated['icon_external_url'];
         }
 
-        $newTechnology->name = $data['name'];
-        $newTechnology->color = $data['color'];
-        $newTechnology->level = $data['level'];
+        $newTechnology->name = $validated['name'];
+        $newTechnology->color = $validated['color'];
+        $newTechnology->level = $validated['level'];
 
         $newTechnology->save();
 
@@ -78,14 +77,19 @@ class TechnologyController extends Controller
      */
     public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
+        // dd($request->all());
         $validated = $request->all();
 
         //aggiunta link esterno o file nello storage locale del server
-        if (isset($validated['icon'])) {
-            Storage::putFile($validated['icon']);
-            $technology->icon = $validated['icon'];
-        } else if (isset($validated['icon_external_url'])) {
-            $technology->icon_url = $validated['icon_external_url'];
+        // if (isset($validated['icon'])) {
+        //     Storage::putFile($validated['icon']);
+        //     $technology->icon = $validated['icon'];
+        // } else if (isset($validated['icon_external_url'])) {
+        //     $technology->icon_url = $validated['icon_external_url'];
+        // }
+
+        if (isset($validated['icon_external_url'])) {
+            $technology->icon_external_url = $validated['icon_external_url'];
         }
 
         $technology->name = $validated['name'];
