@@ -1,0 +1,137 @@
+[
+    {
+        "id": 1,
+        "name": "Portfolio personale",
+        "slug": "ntn-rss-deserunt-neque-similique",
+        "customer": null,
+        "description": "Backend e gestione contenuti per il io portfolio personale",
+        "media": [
+            {
+                "url": "uploads/media/kEPBQPk4zA9k4eJfiHUmgmpCDrq9VnkA7xdffP9s.png",
+                "type": "image"
+            },
+            {
+                "url": "uploads/media/O1otsP52Ih0Y8bzv6Ol9XAhtrRGCISHNfqjd6JK0.png",
+                "type": "image"
+            },
+            {
+                "url": "uploads/media/KoMOGreQ4hr2kdQmV0PzIfH4Nv1YazZrAanrzj9R.png",
+                "type": "image"
+            },
+            {
+                "url": "uploads/media/WHaLji231Yb77XVXMJdkDXjc3ByVrXHwY3yWZ0Vn.png",
+                "type": "image"
+            }
+        ],
+        "technologies": [
+            "PHP",
+            "Laravel",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Tailwind"
+        ],
+        "external_link": null
+    },
+    {
+        "id": 2,
+        "name": "in veritatis sed",
+        "slug": "ntn-rss-in-veritatis-sed",
+        "customer": "Michelle Grasso",
+        "description": "Nihil est ipsum quas dolorem. Repellat voluptate amet nesciunt nemo a animi quia. Aut voluptate quia quisquam molestiae rerum.",
+        "media": [
+            { "url": "https://picsum.photos/600/400.jpg", "type": "image" },
+            { "url": "https://picsum.photos/600/400.jpg", "type": "image" }
+        ],
+        "technologies": ["PHP", "CSS", "Laravel"],
+        "external_link": null
+    },
+    {
+        "id": 3,
+        "name": "et et a",
+        "slug": "ntn-rss-et-et-a",
+        "customer": "Nick Fontana",
+        "description": "Alias vitae omnis quos et mollitia. Qui est voluptas a illo facere. Assumenda exercitationem aut minus. Doloribus harum voluptates voluptatem voluptatem delectus adipisci deleniti occaecati.",
+        "media": [
+            { "url": "https://picsum.photos/600/400.jpg", "type": "image" }
+        ],
+        "technologies": ["PHP", "CSS", "Laravel"],
+        "external_link": null
+    },
+    {
+        "id": 4,
+        "name": "tempore delectus hic",
+        "slug": "ntn-rss-tempore-delectus-hic",
+        "customer": "Fabiano Ferrara",
+        "description": "Labore eum esse iure commodi sint eos praesentium. Aut dignissimos reprehenderit voluptatem saepe voluptatem dolores non nesciunt. Eligendi non ut eos voluptas et id.",
+        "media": [],
+        "technologies": ["JavaScript", "PHP"],
+        "external_link": null
+    },
+    {
+        "id": 5,
+        "name": "enim est repellat",
+        "slug": "ntn-rss-enim-est-repellat",
+        "customer": "Silvana Rizzo",
+        "description": "Voluptate ex facere pariatur et autem. Et ea odit a et voluptatibus veritatis voluptates. Odio vel repudiandae quis qui. Veniam reprehenderit fugiat architecto magni explicabo.",
+        "media": [],
+        "technologies": ["JavaScript", "CSS", "Laravel"],
+        "external_link": null
+    },
+    {
+        "id": 6,
+        "name": "fugit assumenda qui",
+        "slug": "ntn-rss-fugit-assumenda-qui",
+        "customer": "Dr. Anastasio Rinaldi",
+        "description": "Voluptas esse atque impedit aliquid omnis a. Delectus ut accusamus omnis quo laudantium perferendis. Laudantium ratione qui excepturi eum.",
+        "media": [
+            { "url": "https://picsum.photos/600/400.jpg", "type": "image" },
+            { "url": "https://picsum.photos/600/400.jpg", "type": "image" }
+        ],
+        "technologies": ["JavaScript", "CSS"],
+        "external_link": null
+    },
+    {
+        "id": 7,
+        "name": "repudiandae quas quia",
+        "slug": "ntn-rss-repudiandae-quas-quia",
+        "customer": "Jarno Bernardi",
+        "description": "Occaecati voluptates vel molestiae quia amet. Delectus eos et omnis non eos et repudiandae voluptates. Consequatur quos aspernatur iure nobis.",
+        "media": [
+            { "url": "https://picsum.photos/600/400.jpg", "type": "image" },
+            { "url": "https://picsum.photos/600/400.jpg", "type": "image" }
+        ],
+        "technologies": ["PHP", "HTML"],
+        "external_link": null
+    },
+    {
+        "id": 8,
+        "name": "velit voluptas omnis",
+        "slug": "ntn-rss-velit-voluptas-omnis",
+        "customer": "Giovanni Ferraro",
+        "description": "Sit excepturi dolor quo non. Corporis voluptates et quia ipsum dolor atque. In laborum quia magnam libero voluptate.",
+        "media": [],
+        "technologies": ["HTML", "PHP"],
+        "external_link": null
+    },
+    {
+        "id": 9,
+        "name": "aut voluptatibus ea",
+        "slug": "ntn-rss-aut-voluptatibus-ea",
+        "customer": "Piccarda Ferrari",
+        "description": "Qui ut quibusdam neque possimus placeat. Consequatur mollitia quod necessitatibus error similique et veniam. Occaecati deserunt corporis accusantium.",
+        "media": [],
+        "technologies": ["HTML", "CSS", "Laravel"],
+        "external_link": null
+    },
+    {
+        "id": 10,
+        "name": "repudiandae tenetur sint",
+        "slug": "ntn-rss-repudiandae-tenetur-sint",
+        "customer": "Dott. Raffaella Piras",
+        "description": "Ut maiores ut sequi quis laborum nemo debitis. Qui omnis voluptatem quo ea cupiditate dolor. Nihil fugiat quae ut praesentium. Non quo qui eaque omnis nulla similique.",
+        "media": [],
+        "technologies": ["HTML", "JavaScript"],
+        "external_link": null
+    }
+]
